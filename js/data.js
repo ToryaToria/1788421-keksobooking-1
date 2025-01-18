@@ -59,7 +59,7 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-const DWELLING_COUNT_MAX = 10;
+const DWELLING_COUNT_MAX = 5;
 
 const LAT_COUNT_MIN = 35.65000;
 const LAT_COUNT_MAX = 35.70000;

@@ -49,6 +49,13 @@ function removeNumbersFromString(str) {
   let num = 0;
   num = parseInt(str.replace(/\D+/g, ''), 10); // заменить в строке всё что не цифры (\D) на ''  и преобразовать в число.
 
+  // let num = str.replace(/\D+/g, ''); // заменить в строке всё что не цифры (\D) на ''  и преобразовать в число.
+  // num = parseInt(str, 10);
+  // console.log('num: ' + num);
+
+  return num;
+};
+
   const str5 = 'фываыфвп 1234 вапрапр, 568, asdfgdfgjtymQQQ 9101111';
   const namb = -123.45;
   
@@ -76,12 +83,7 @@ function removeNumbersFromString(str) {
   
     // return +(Math.random() * (max - min +1) + min).toFixed(digits); // Максимум и минимум - включаются (+1)
   }
-  return num;
-}
-
-const str5 = 'фываыфвп 1234 вапрапр, 568, asdfgdfgjtymQQQ 9101111';
-const namb = -123.45;
-
+ 
 console.log('тест1: в строке есть цифры')
 removeNumbersFromString(str5);
 

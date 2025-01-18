@@ -83,11 +83,25 @@ fieldset {
   overflow: hidden;
 }
 
+/* .map__canvas {
+  width: 100%;
+  height: 500px;
+  background-color: #dddddd;
+} */
+
 .map__canvas {
   width: 100%;
   height: 500px;
   background-color: #dddddd;
+
+  /* эти стили я дописала временно - потом удалю*/
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /* flex-wrap: wrap; */
+  padding: 20px;
 }
+
 
 
 /**

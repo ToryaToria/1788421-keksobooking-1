@@ -1062,3 +1062,14 @@ fieldset {
 .hidden {
   display: none;
 }
+
+
+/* класс для пристин - добавила я - надо убрать */
+.error-pristine {
+  box-sizing: border-box;
+  color: #ff0000;
+  background-color: #ffff00;
+  text-transform: uppercase;
+  padding: 10px;
+  width: calc(100% - 20px);
+}

@@ -1,6 +1,6 @@
 import {
   DwellingArray
-} from './generate_dwelling.js';
+} from './generate-dwelling.js';
 
 import {generateThumbnails,
   OBJ
@@ -8,10 +8,11 @@ import {generateThumbnails,
 
 // import {
 //   formDisabled
-// } from './formDisabled.js';
+// } from './form-disabled.js';
 
-import './formDisabled.js' ;
+// import './form-disabled.js' ;
 
+import './valid-form.js' ;
 
 // generateThumbnails(OBJ);
 // console.log(OBJ);

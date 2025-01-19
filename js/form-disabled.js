@@ -51,7 +51,7 @@ const formActiv = () => {
   alert('форма РАЗблокирована!');
 }
 
-formDisabled();
+formDisabled(); // здесь или в MAIN?  
 
 
 btnActiv.addEventListener('click',formActiv);

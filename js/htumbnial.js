@@ -129,6 +129,8 @@ const createThumbnail = (offer) => {
 	return thumbnail;
 };
 
+
+
 //генерирую DWELLING_COUNT_MAX элементов и отрисовываю их все сразу в ДОМ через фрагмент
 const generateThumbnails = (offers) => {
 	const fragment = document.createDocumentFragment();
@@ -144,5 +146,6 @@ const generateThumbnails = (offers) => {
 // generateThumbnails(OBJ);
 export {
 	generateThumbnails,
+	createThumbnail,
 	OBJ
 };

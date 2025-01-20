@@ -30,7 +30,7 @@ const formDisabled = () => {
   //   elem.setAttribute("disabled", "");
   // });
   // mapfiltersFildset.setAttribute("disabled", "");
-  alert('форма заблокирована!');
+  console.log('форма заблокирована!');
 
 };
 //=================
@@ -48,16 +48,16 @@ const formActiv = () => {
   // });
   // mapfiltersFildset.removeAttribute("disabled");
 
-  alert('форма РАЗблокирована!');
+  console.log('форма РАЗблокирована!');
 }
 
 formDisabled(); // здесь или в MAIN?  
 
 
-btnActiv.addEventListener('click',formActiv);
-btnNotActiv.addEventListener('click',formDisabled);
+// btnActiv.addEventListener('click',formActiv);
+// btnNotActiv.addEventListener('click',formDisabled);
 
 export{
-  formDisabled,
+  // formDisabled,
   formActiv
 };

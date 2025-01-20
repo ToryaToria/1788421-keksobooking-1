@@ -2,7 +2,8 @@ import {
   DwellingArray
 } from './generate-dwelling.js';
 
-import {generateThumbnails,
+import {
+  generateThumbnails,
   OBJ
 } from './htumbnial.js';
 
@@ -12,12 +13,13 @@ import {generateThumbnails,
 
 // import './form-disabled.js' ;
 
-import './valid-form.js' ;
+// import './valid-form.js' ;
+import './add-map-leaflet.js' ;
 
 // generateThumbnails(OBJ);
 // console.log(OBJ);
 
-generateThumbnails(DwellingArray);
+// generateThumbnails(DwellingArray);
 
 // DwellingArray();
 // console.log(DwellingArray);

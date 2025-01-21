@@ -15,6 +15,7 @@ import {
 
 // import './valid-form.js' ;
 import './add-map-leaflet.js' ;
+import './slider-price.js' ;
 
 // generateThumbnails(OBJ);
 // console.log(OBJ);

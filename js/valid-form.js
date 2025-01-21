@@ -6,7 +6,7 @@ const adForm = document.querySelector('.ad-form');
 const fildTitle = adForm.querySelector('#title');
 const fildPrice = adForm.querySelector('#price');
 
-const dwellingType = adForm.querySelector('[#type');
+const dwellingType = adForm.querySelector('#type');
 
 const dwellingPrice = adForm.querySelector('#price');
 
@@ -169,3 +169,6 @@ adForm.addEventListener('submit', (evt) => {
   pristine.validate();
 });
 
+export {
+  dwellingOptions
+};

@@ -1,37 +1,36 @@
-
 import {
 	createIdGenerator,
 	getRandomInteger,
 	getRandomIntPointFloat,
 	getRandomArrayElement,
 	createRandomArray
-} from './util.js'
+} from './util.js';
 
 import {
-  TITLE,
-  DESCRIPTIONS,
-  TYPE,
-  CHECK,
-  FEATURES,
+	TITLE,
+	DESCRIPTIONS,
+	TYPE,
+	CHECK,
+	FEATURES,
 	PHOTOS,
-  DWELLING_COUNT_MAX,
-  LAT_COUNT_MIN,
-  LAT_COUNT_MAX,
-  LNG_COUNT_MIN,
-  LNG_COUNT_MAX,
-  DIGIT
-} from './data.js'
+	DWELLING_COUNT_MAX,
+	LAT_COUNT_MIN,
+	LAT_COUNT_MAX,
+	LNG_COUNT_MIN,
+	LNG_COUNT_MAX,
+	DIGIT
+} from './constants.js';
 
 const createLocationLat = () => getRandomIntPointFloat(LAT_COUNT_MIN, LAT_COUNT_MAX, DIGIT);
 const createLocationLng = () => getRandomIntPointFloat(LNG_COUNT_MIN, LNG_COUNT_MAX, DIGIT);
 
-let ava_index = createIdGenerator();
+const ava_index = createIdGenerator();
 
 // создание объекта с жильём
 const createDwelling = () => ({
-	avatar: `photos/user${ava_index()}.png`, 
+	avatar: `photos/user${ava_index()}.png`,
 	title: getRandomArrayElement(TITLE),
-	adress: {
+		adress: {
 		lat: createLocationLat(),
 		lng: createLocationLng()
 	},
@@ -41,9 +40,9 @@ const createDwelling = () => ({
 	guests: getRandomInteger(1, 20), // до скольки ???
 	checkin: getRandomArrayElement(CHECK),
 	checkout: getRandomArrayElement(CHECK),
-	features: createRandomArray(FEATURES), 
+	features: createRandomArray(FEATURES),
 	description: getRandomArrayElement(DESCRIPTIONS),
-	photos: createRandomArray(PHOTOS), 
+	photos: createRandomArray(PHOTOS),
 });
 
 // создание массива объектов
@@ -52,4 +51,4 @@ const DwellingArray = Array.from({ length: DWELLING_COUNT_MAX }, (_, index) => c
 
 export {
 	DwellingArray
-}
+};

@@ -2,69 +2,19 @@
 
 import {
 	TYPE_TRANSLATION
-} from './data.js'
+} from './constants.js';
 
 
-const OBJ = [
-	{
-		adress: {
-			lat: 35.66185, lng: 139.77543
-		},
-		avatar: "photos/user03.png",
-		// avatar: "",
-
-		checkin: "13.00",
-		checkout: "12.00",
-		// description: "Величественный и изысканный дворец",
-		// features: [
-		// 	"parking",
-		// 	"elevator"
-		// ],
-		guests: 4,
-		photos: [
-			"https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg",
-			"https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg",
-			"https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg"
-		],
-		price: 45512,
-		rooms: 7,
-		// title: "Оазис в центре города",
-		type: "hotel"
-	},
-
-];
-
-// получаю контент шаблона
 const thumbnailTemplate = document.querySelector('#card').content;
 
-// //создаю переменные для тегов
-// const avatar = thumbnailTemplate.querySelector('.popup__avatar');
-// const title = thumbnailTemplate.querySelector('.popup__title');
-// const adress = thumbnailTemplate.querySelector('.popup__text--address');
-// const price = thumbnailTemplate.querySelector('.popup__text--price');
-// const type = thumbnailTemplate.querySelector('.popup__type');
-// const capacity = thumbnailTemplate.querySelector('.popup__text--capacity');
-// const time = thumbnailTemplate.querySelector('.popup__text--time');
-// const lis = thumbnailTemplate.querySelectorAll('.popup__feature');
-// const descript = thumbnailTemplate.querySelector('.popup__description');
-// const photos = thumbnailTemplate.querySelector('.popup__photos');
-// const photo = thumbnailTemplate.querySelector('.popup__photo');
-
-
-// куда вставить все готовые объявления
 const container = document.querySelector('#map-canvas');
 
-// функция генгерации  и заполнения элемента из шаблона
-// {деструктуризация - вместо picture}
-// const createThumbnail = ({ url, description, comments, likes }) 
-
-//функция проверки когда данных для заполнения не хватает.
 const verificationEnoughData = (block, value) => {
 	if (value) {
 		return value;
 	}
 	block.remove();
-}
+};
 
 const createThumbnail = (offer) => {
 	//клонирую шаблон
@@ -88,10 +38,9 @@ const createThumbnail = (offer) => {
 		const fragm = document.createDocumentFragment();
 		for (let i = 0; i < arr.length; i++) {
 			const img = photo.cloneNode(true);
-			img.alt = `фоточка ${i}`
+			img.alt = `фоточка ${i}`;
 			img.src = arr[i];
 			fragm.append(img);
-			// console.log(arr[i]);
 		}
 		return fragm;
 	}
@@ -108,22 +57,23 @@ const createThumbnail = (offer) => {
 	descript.textContent = verificationEnoughData(descript, offer.description);
 
 	//заполнение фоточек
-	photos.innerHTML = ''; 	//очистить всё внутри чтобы img-шаблон не попадал в разметку
+	//очистить всё внутри чтобы img-шаблон не попадал в разметку
+	photos.innerHTML = '';
 	if (verificationEnoughData(photos, offer.photos)) {
 		const images = cerateImgs(offer.photos);
 		photos.append(images);
 	}
 
-	// заполнение features 
+	// заполнение features
 	lis.forEach((li) => {
 		if (verificationEnoughData(li, offer.features)) {
-		const isNecessary = offer.features.some(
-			(userFeatuers) => li.classList.contains(('popup__feature--' + userFeatuers))
-		)
-		if (!isNecessary) {
-			li.remove();
+			const isNecessary = offer.features.some(
+				(userFeatuers) => li.classList.contains(('popup__feature--' + userFeatuers))
+			);
+			if (!isNecessary) {
+				li.remove();
+			}
 		}
-	}
 	});
 
 	return thumbnail;
@@ -141,8 +91,7 @@ const generateThumbnails = (offers) => {
 	container.append(fragment);
 };
 
-// generateThumbnails(OBJ);
 export {
 	generateThumbnails,
-	OBJ
+	createThumbnail,
 };

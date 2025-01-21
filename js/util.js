@@ -31,7 +31,7 @@ function getRandomIntPointFloat(a, b, digits = 1) {
 	let max = Math.max(a, b);
 
 	return +(Math.random() * (max - min) + min).toFixed(digits); // Максимум включаeтся, а минимум - нет; + - для преобразования строки в число
-}
+};
 
 //функция для алгоритма тасования Фишера-Йетса
 function shuffle(arr) {
@@ -44,7 +44,7 @@ function shuffle(arr) {
 	return newArr;
 }
 
-//функция получения случайного элемент из массива 
+//функция получения случайного элемент из массива
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 // создание массива из перемешанных случайно элементов случайной длины не более длины исходного массива
@@ -57,4 +57,4 @@ export {
 	getRandomIntPointFloat,
 	getRandomArrayElement,
 	createRandomArray
-}
+};

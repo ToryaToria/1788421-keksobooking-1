@@ -31,7 +31,7 @@ function getRandomIntPointFloat(a, b, digits = 1) {
 	let max = Math.max(a, b);
 
 	return +(Math.random() * (max - min) + min).toFixed(digits); // Максимум включаeтся, а минимум - нет; + - для преобразования строки в число
-}
+};
 
 //функция для алгоритма тасования Фишера-Йетса
 function shuffle(arr) {
@@ -57,4 +57,4 @@ export {
 	getRandomIntPointFloat,
 	getRandomArrayElement,
 	createRandomArray
-}
+};

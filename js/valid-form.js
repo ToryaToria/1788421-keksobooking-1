@@ -16,7 +16,7 @@ const dwellingOptions = {
   hotel: 3000,
   house: 5000,
   palace: 10000
-}
+};
 
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
@@ -30,16 +30,16 @@ const capaCityOptions = {
   2: ['1', '2'],
   3: ['1', '2', '3'],
   100: ['0'],
-}
+};
 //+++++++++++++++++++++++++++
 
 const pristine = new Pristine(adForm, {
-  classTo: 'ad-form__element', 
-  errorClass: 'form__item--invalid', 
-  errorTextParent: 'ad-form__element', 
-  errorTextTag: 'p', 
-  errorTextClass: 'error-pristine' 
-}, false); 
+  classTo: 'ad-form__element',
+  errorClass: 'form__item--invalid',
+  errorTextParent: 'ad-form__element',
+  errorTextTag: 'p',
+  errorTextClass: 'error-pristine'
+});
 
 //++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -101,18 +101,18 @@ function validatecapaCity() {
 function getcapaCityErrorMessage() {
 
   if (roomNumber.value !== '100' && capaCity.value === '0') {
-    return 'Нельзя выбрать "Не для гостей!"'
+    return 'Нельзя выбрать "Не для гостей!"';
   };
 
   switch (roomNumber.value) {
-    case '1':  
-      return 'Не больше 1 гостя!'
+    case '1':
+      return 'Не больше 1 гостя!';
 
-    case '2':  
-      return 'Не больше 2 гостей!'
+    case '2':
+      return 'Не больше 2 гостей!';
 
     default:
-      return 'Можно выбрать только "Не для гостей!"'
+      return 'Можно выбрать только "Не для гостей!"';
   };
 };
 
@@ -128,7 +128,7 @@ pristine.addValidator(
 pristine.addValidator(
   fildPrice,
   validatePriceNumber,
-  `Только цифры!`,
+  'Только цифры!',
   1
 );
 

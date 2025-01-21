@@ -14,7 +14,7 @@ noUiSlider.create(sliderPrice, {
     min: 0,
     max: 100000,
   },
-  start: 500,
+  start: 1000,
   step: 1,
   connect: 'lower',
 
@@ -27,9 +27,6 @@ noUiSlider.create(sliderPrice, {
     },
   },
 });
-
-inputPrice.value = 1000; //ПОЧЕМУ НЕ РАБОТАЕТ???
-
 
 sliderPrice.noUiSlider.on('update', () => {
   console.log('Cлайдер  подключен');

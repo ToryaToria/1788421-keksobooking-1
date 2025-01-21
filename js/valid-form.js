@@ -49,9 +49,9 @@ function validateNickname(value) {
   // return value.length >= MIN_TITLE && value.length <= MAX_TITLE;
 
   return value.length <= MAX_TITLE;
-};
+}
 
-// функция проверки максимума поля "Цена" 
+// функция проверки максимума поля "Цена"
 // function validatePrice(prise) {
 //   return prise <= MAX_PRICE;
 // };
@@ -60,33 +60,33 @@ function validateNickname(value) {
 function validatePriceNumber(prise) {
   const numbPattern = /\d/.test(prise);
   return numbPattern;
-};
+}
 
 //================================
 // функция проверки соответствия полей "тип жилья" и "цена"
 function validateDwellingTypePrice() {
   return dwellingPrice.value >= dwellingOptions[dwellingType.value];
-};
+}
 
 // функция генерации сообщения об ошибке для ф-ции validateDwellingTypePrice
 function getDwellingErrorMessage() {
   return `Минимальная цена ${dwellingOptions[dwellingType.value]} рублей`;
-};
+}
 
 // функция для обработчика события "change" на поле "Тип жилья"
 function onDwellingTypeChange() {
   dwellingPrice.placeholder = dwellingOptions[this.value];
-};
+}
 
 //================================
 // функции синхронизации полей "заезд" и "выезд" - повесить на "change" для полей "заезд" и "выезд"
 function timingInOut() {
   timeOut.value = timeIn.value;
-};
+}
 
 function timingOutIn() {
   timeIn.value = timeOut.value;
-};
+}
 
 timeIn.addEventListener('change', timingInOut);
 timeOut.addEventListener('change', timingOutIn);
@@ -95,14 +95,14 @@ timeOut.addEventListener('change', timingOutIn);
 // ф-ция проверки соответствия поля "кол-во гостей"
 function validatecapaCity() {
   return capaCityOptions[roomNumber.value].includes(capaCity.value);
-};
+}
 
 // функция генерации сообщения об ошибке для ф-ции validatecapaCity
 function getcapaCityErrorMessage() {
 
   if (roomNumber.value !== '100' && capaCity.value === '0') {
     return 'Нельзя выбрать "Не для гостей!"';
-  };
+  }
 
   switch (roomNumber.value) {
     case '1':
@@ -113,8 +113,8 @@ function getcapaCityErrorMessage() {
 
     default:
       return 'Можно выбрать только "Не для гостей!"';
-  };
-};
+  }
+}
 
 //++++++++++++ ПРОВЕРКИ +++++++++++++++++
 // проверка поля "Заголовок"

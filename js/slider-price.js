@@ -42,14 +42,13 @@ function onInputTypeChange() {
   sliderPrice.noUiSlider.updateOptions({
     start: start,
   });
-};
+}
 
 function onInputPriceChange() {
-  console.log('Hi!')
+  console.log('Hi!');
    sliderPrice.noUiSlider.set(inputPrice.value);
 
   console.log(inputPrice.value);
-
 }
 
 inputType.addEventListener('change', onInputTypeChange);

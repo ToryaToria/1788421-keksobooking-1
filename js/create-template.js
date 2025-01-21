@@ -14,7 +14,7 @@ const verificationEnoughData = (block, value) => {
 		return value;
 	}
 	block.remove();
-}
+};
 
 const createThumbnail = (offer) => {
 	//клонирую шаблон
@@ -38,7 +38,7 @@ const createThumbnail = (offer) => {
 		const fragm = document.createDocumentFragment();
 		for (let i = 0; i < arr.length; i++) {
 			const img = photo.cloneNode(true);
-			img.alt = `фоточка ${i}`
+			img.alt = `фоточка ${i}`;
 			img.src = arr[i];
 			fragm.append(img);
 		}
@@ -64,12 +64,12 @@ const createThumbnail = (offer) => {
 		photos.append(images);
 	}
 
-	// заполнение features 
+	// заполнение features
 	lis.forEach((li) => {
 		if (verificationEnoughData(li, offer.features)) {
 			const isNecessary = offer.features.some(
 				(userFeatuers) => li.classList.contains(('popup__feature--' + userFeatuers))
-			)
+			);
 			if (!isNecessary) {
 				li.remove();
 			}

@@ -44,7 +44,7 @@ function shuffle(arr) {
 	return newArr;
 }
 
-//функция получения случайного элемент из массива 
+//функция получения случайного элемент из массива
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 // создание массива из перемешанных случайно элементов случайной длины не более длины исходного массива

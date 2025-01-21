@@ -24,7 +24,7 @@ import {
 const createLocationLat = () => getRandomIntPointFloat(LAT_COUNT_MIN, LAT_COUNT_MAX, DIGIT);
 const createLocationLng = () => getRandomIntPointFloat(LNG_COUNT_MIN, LNG_COUNT_MAX, DIGIT);
 
-let ava_index = createIdGenerator();
+const ava_index = createIdGenerator();
 
 // создание объекта с жильём
 const createDwelling = () => ({

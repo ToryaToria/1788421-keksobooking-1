@@ -1,29 +1,19 @@
-import {
-  DwellingArray
-} from './generate-dwelling.js';
+import { createThumbnail } from './create-template.js';
 
-import {
-  createThumbnail
-} from './create-template.js';
-
-import {
-  formActiv
-} from './form-disabled.js';
-
+import { formActivForm } from './form-disabled.js';
 
 const fieldAddrwss = document.querySelector('#address');
 
 const myMap = L.map('map-canvas')
   .on('load', () => {
     console.log('Карта инициализирована');
-    // активация формы
-    formActiv();
+    formActivForm();
   })
   .setView({
     lat: 35.6895,
     lng: 139.692,
   },
-  12
+    12
   );
 
 L.tileLayer(
@@ -73,9 +63,10 @@ const icon = L.icon({
 const markerGroup = L.layerGroup().addTo(myMap);
 
 const createMarker = (point) => {
-  const lat = point.adress.lat;
-  const lng = point.adress.lng;
-  console.log(typeof lat, lng);
+  const lat = point.location.lat;
+  const lng = point.location.lng;
+  // console.log(typeof lat, lng);
+  // console.log(point);
 
   const marker = L.marker(
     {
@@ -90,6 +81,4 @@ const createMarker = (point) => {
     .bindPopup(() => createThumbnail(point));
 };
 
-DwellingArray.forEach((point) => {
-  createMarker(point);
-});
+export { createMarker };

@@ -1,7 +1,7 @@
 // слайдер noUiSlider для поля "Цена"
 import {
-  dwellingOptions
-} from './valid-form.js';
+  DwellingOptions
+} from './constants.js';
 
 
 const sliderPrice = document.querySelector('.ad-form__slider');
@@ -29,14 +29,12 @@ noUiSlider.create(sliderPrice, {
 });
 
 sliderPrice.noUiSlider.on('update', () => {
-  console.log('Cлайдер  подключен');
   inputPrice.value = sliderPrice.noUiSlider.get();
 });
 
-
 function onInputTypeChange() {
 
-  const start = dwellingOptions[this.value];
+  const start = DwellingOptions[this.value];
   inputPrice.placeholder = start;
 
   sliderPrice.noUiSlider.updateOptions({

@@ -9,19 +9,23 @@ const formDisabled = () => {
   formAdd.classList.add('ad-form--disabled');
   mapFilters.classList.add('ad-form--disabled');
 
-  console.log('форма заблокирована!');
+  console.log('формЫ заблокированЫ!');
 };
 
-const formActiv = () => {
+const formActivForm = () => {
   formAdd.classList.remove('ad-form--disabled');
+
+  console.log('форма ad-form РАЗблокирована!');
+};
+
+const formActivFilter = () => {
   mapFilters.classList.remove('ad-form--disabled');
 
-  console.log('форма РАЗблокирована!');
+  console.log('форма с фильтрами РАЗблокирована!');
 };
-
 formDisabled(); // здесь или в MAIN?
 
 export {
-  // formDisabled,
-  formActiv
+  formActivFilter,
+  formActivForm
 };

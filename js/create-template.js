@@ -1,9 +1,6 @@
-// ДЗ7 "Отрисуй меня полностью" генерация объявдений по шаблону
-
 import {
 	TYPE_TRANSLATION
 } from './constants.js';
-
 
 const thumbnailTemplate = document.querySelector('#card').content;
 
@@ -79,19 +76,6 @@ const createThumbnail = (offer) => {
 	return thumbnail;
 };
 
-//генерирую DWELLING_COUNT_MAX элементов и отрисовываю их все сразу в ДОМ через фрагмент
-const generateThumbnails = (offers) => {
-	const fragment = document.createDocumentFragment();
-
-	offers.forEach((offer) => {
-		const thumbnail = createThumbnail(offer);
-		fragment.append(thumbnail);
-	});
-
-	container.append(fragment);
-};
-
 export {
-	generateThumbnails,
 	createThumbnail,
 };

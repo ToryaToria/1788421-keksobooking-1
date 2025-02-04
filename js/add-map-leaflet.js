@@ -1,4 +1,4 @@
-import { createThumbnail } from './create-template.js';
+import { createTemplate } from './create-template.js';
 
 import { formActivForm } from './form-disabled.js';
 
@@ -78,7 +78,24 @@ const createMarker = (point) => {
 
   marker
     .addTo(markerGroup)
-    .bindPopup(() => createThumbnail(point));
+    .bindPopup(() => createTemplate(point));
 };
 
-export { createMarker };
+const mapOnset = () => {
+  mainMarker.setLatLng({
+    lat: 35.6895,
+    lng: 139.692,
+  });
+
+  myMap.setView({
+    lat: 35.6895,
+    lng: 139.692,
+  }, 12);
+};
+
+
+
+export {
+  createMarker,
+  mapOnset
+};

@@ -38,8 +38,6 @@ const pristine = new Pristine(adForm, {
 // функция проверки длины поля "Заголовок"
 function validateNickname(value) {
   return value.length >= MIN_TITLE && value.length <= MAX_TITLE;
-
-  // return value.length <= MAX_TITLE;
 }
 
 // функция проверки максимума поля "Цена"
@@ -139,14 +137,6 @@ pristine.addValidator(
   3
 );
 
-pristine.addValidator(
-  dwellingType,
-  validateDwellingTypePrice,
-  getDwellingErrorMessage
-);
-
-
-
 // проверка соответствия полей "кол-во комнат" и "кол-во мест"
 pristine.addValidator(
   capaCity,
@@ -156,18 +146,6 @@ pristine.addValidator(
 //+++++++++++++++++++++
 
 dwellingType.addEventListener('change', onDwellingTypeChange);
-
-// // проверка при отправке формы
-// adForm.addEventListener('submit', (evt) => {
-//   // отменить действие по умолчанию
-//   evt.preventDefault();
-
-//   // alert('Форма!');
-
-//   // запустить пристин
-//   pristine.validate();
-// });
-
 
 const pristineReset = () => pristine.reset();
 const pristineIsValid = () => pristine.validate();

@@ -5,6 +5,7 @@ import {
   showErrorMessage
 } from './show-message.js'
 import { SubmitBtnText } from './constants.js';
+import {mapOnset} from './add-map-leaflet.js'
 
 const adForm = document.querySelector('.ad-form');
 
@@ -20,13 +21,25 @@ adForm.addEventListener('submit', async (evt) => {
 
   if (pristineIsValid()) {
     toggleSubmitBtn(true);
-    alert('отправляю форму');
+    // alert('отправляю форму');
     try {
       await sendData(new FormData(adForm));
       showSuccessMessage();
+      adForm.reset();
+      mapOnset();
     } catch {
       showErrorMessage();
     }
     toggleSubmitBtn();
   }
 });
+
+const btnReset = document.querySelector('.ad-form__reset');
+
+const noBtnReset = (evt) => {
+  evt.preventDefault();
+
+  mapOnset();
+  adForm.reset();
+}
+btnReset.addEventListener('click', noBtnReset);

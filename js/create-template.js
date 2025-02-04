@@ -2,9 +2,9 @@ import {
 	TYPE_TRANSLATION
 } from './constants.js';
 
-const thumbnailTemplate = document.querySelector('#card').content;
+const template = document.querySelector('#card').content;
 
-const container = document.querySelector('#map-canvas');
+// const container = document.querySelector('#map-canvas');
 
 const verificationEnoughData = (block, value) => {
 	if (value) {
@@ -13,22 +13,22 @@ const verificationEnoughData = (block, value) => {
 	block.remove();
 };
 
-const createThumbnail = (offer) => {
+const createTemplate = (templateArray) => {
 	//клонирую шаблон
-	const thumbnail = thumbnailTemplate.cloneNode(true);
+	const templateNode = template.cloneNode(true);
 
 	//создаю переменные для тегов
-	const avatar = thumbnail.querySelector('.popup__avatar');
-	const title = thumbnail.querySelector('.popup__title');
-	const adress = thumbnail.querySelector('.popup__text--address');
-	const price = thumbnail.querySelector('.popup__text--price');
-	const type = thumbnail.querySelector('.popup__type');
-	const capacity = thumbnail.querySelector('.popup__text--capacity');
-	const time = thumbnail.querySelector('.popup__text--time');
-	const lis = thumbnail.querySelectorAll('.popup__feature');
-	const descript = thumbnail.querySelector('.popup__description');
-	const photos = thumbnail.querySelector('.popup__photos');
-	const photo = thumbnail.querySelector('.popup__photo');
+	const avatar = templateNode.querySelector('.popup__avatar');
+	const title = templateNode.querySelector('.popup__title');
+	const location = templateNode.querySelector('.popup__text--address');
+	const price = templateNode.querySelector('.popup__text--price');
+	const type = templateNode.querySelector('.popup__type');
+	const capacity = templateNode.querySelector('.popup__text--capacity');
+	const time = templateNode.querySelector('.popup__text--time');
+	const lis = templateNode.querySelectorAll('.popup__feature');
+	const descript = templateNode.querySelector('.popup__description');
+	const photos = templateNode.querySelector('.popup__photos');
+	const photo = templateNode.querySelector('.popup__photo');
 
 	// функция генерации фоточек
 	function cerateImgs(arr) {
@@ -42,29 +42,39 @@ const createThumbnail = (offer) => {
 		return fragm;
 	}
 
-	// avatar.src = offer.avatar;
-	avatar.src = verificationEnoughData(avatar, offer.avatar);
+	console.log(templateArray.author.avatar);
 
-	title.textContent = verificationEnoughData(title, offer.title);
-	adress.textContent = `широта: ${verificationEnoughData(adress, offer.adress.lat)}, долгота: ${verificationEnoughData(adress, offer.adress.lng)}`;
-	price.textContent = `${verificationEnoughData(price, offer.price)} ₽/ночь`;
-	type.textContent = TYPE_TRANSLATION[verificationEnoughData(type, offer.type)];
-	capacity.textContent = `${verificationEnoughData(capacity, offer.rooms)} комнаты для ${verificationEnoughData(capacity, offer.guests)} гостей`;
-	time.textContent = `Заезд после ${verificationEnoughData(time, offer.checkin)}, выезд до ${verificationEnoughData(time, offer.checkout)}`;
-	descript.textContent = verificationEnoughData(descript, offer.description);
+	// author.src = templateArray.author.avatar;
+	avatar.src = verificationEnoughData(avatar, templateArray.author.avatar);
+
+	title.textContent = verificationEnoughData(title, templateArray.offer.title);
+
+	// location.textContent = `широта: ${verificationEnoughData(location, offer.location.lat)}, долгота: ${verificationEnoughData(location, templateArray.location.lng)}`;
+
+	location.textContent =  verificationEnoughData(location, templateArray.offer.address);
+	
+	price.textContent = `${verificationEnoughData(price, templateArray.offer.price)} ₽/ночь`;
+
+	type.textContent = TYPE_TRANSLATION[verificationEnoughData(type, templateArray.offer.type)];
+
+	capacity.textContent = `${verificationEnoughData(capacity, templateArray.rooms)} комнаты для ${verificationEnoughData(capacity, templateArray.guests)} гостей`;
+
+	time.textContent = `Заезд после ${verificationEnoughData(time, templateArray.offer.checkin)}, выезд до ${verificationEnoughData(time, templateArray.offer.checkout)}`;
+
+	descript.textContent = verificationEnoughData(descript, templateArray.offer.description);
 
 	//заполнение фоточек
 	//очистить всё внутри чтобы img-шаблон не попадал в разметку
 	photos.innerHTML = '';
-	if (verificationEnoughData(photos, offer.photos)) {
-		const images = cerateImgs(offer.photos);
+	if (verificationEnoughData(photos, templateArray.offer.photos)) {
+		const images = cerateImgs(templateArray.offer.photos);
 		photos.append(images);
 	}
 
 	// заполнение features
 	lis.forEach((li) => {
-		if (verificationEnoughData(li, offer.features)) {
-			const isNecessary = offer.features.some(
+		if (verificationEnoughData(li, templateArray.offer.features)) {
+			const isNecessary = templateArray.offer.features.some(
 				(userFeatuers) => li.classList.contains(('popup__feature--' + userFeatuers))
 			);
 			if (!isNecessary) {
@@ -73,9 +83,9 @@ const createThumbnail = (offer) => {
 		}
 	});
 
-	return thumbnail;
+	return templateNode;
 };
 
 export {
-	createThumbnail,
+	createTemplate,
 };

@@ -43,7 +43,7 @@ function onInputTypeChange() {
 }
 
 function onInputPriceChange() {
-   sliderPrice.noUiSlider.set(inputPrice.value);
+  sliderPrice.noUiSlider.set(inputPrice.value);
   console.log(inputPrice.value);
 }
 

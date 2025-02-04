@@ -43,7 +43,7 @@ function validateNickname(value) {
 // функция проверки максимума поля "Цена"
 function validatePrice(prise) {
   return prise <= MAX_PRICE;
-};
+}
 
 // функция проверки поля "Цена" - только цифры!
 function validatePriceNumber(prise) {

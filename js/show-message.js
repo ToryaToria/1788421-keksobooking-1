@@ -6,7 +6,7 @@ const successMessage = document.querySelector('#success').content.querySelector(
 
 const errorMessage = document.querySelector('#error').content.querySelector('.error');
 
-const errorBtn = errorMessage.querySelector('.error__button')
+const errorBtn = errorMessage.querySelector('.error__button');
 
 const body = document.querySelector('body');
 

@@ -4,11 +4,11 @@
 
 // function each(arr, callback) {
 // 	let result = [];
-	
+
 // 	for (let elem of arr) {
 // 		result.push( callback(elem) ); // вызываем функцию-коллбэк
 // 	}
-	
+
 // 	return result;
 // }
 
@@ -18,7 +18,7 @@
 // function test() {
 // 	let num1 = 1;
 // 	let num2 = 2;
-	
+
 // 	return function() {
 // 		return num1 + num2;
 // 	}
@@ -29,7 +29,7 @@
 // function test() {
 // 	let num1 = 1;
 // 	let num2 = 2;
-	
+
 // 	return function() {
 // 		return num1 + num2;
 // 	}
@@ -40,7 +40,7 @@
 
 // function test() {
 // 	let num = 1;
-	
+
 // 	return function() {
 // 		return num;
 // 	}
@@ -52,7 +52,7 @@
 
 // function func() {
 // 	let num = 0;
-	
+
 // 	return function() {
 // 		console.log(num);
 // 		num++;
@@ -65,7 +65,7 @@
 
 
 // let counter = 0;
-		
+
 // function test() {
 // 	return function() {
 // 		console.log(counter);
@@ -86,7 +86,7 @@
 
 // function test() {
 // 	let counter = 0;
-	
+
 // 	return function() {
 // 		return function() {
 // 			console.log(counter);
@@ -107,7 +107,7 @@
 
 // function test() {
 // 	let counter = 0;
-	
+
 // 	return function() {
 // 		return function() {
 // 			console.log(counter);
@@ -126,13 +126,13 @@
 // func2();
 
 function make(callback) {
-	setTimeout(function() {
+	setTimeout(function () {
 		console.log('1');
 		callback();
 	}, 3000);
 }
 
-make(function() {
+make(function () {
 	console.log('2');
 	console.log('3');
 });

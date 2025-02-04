@@ -5,7 +5,7 @@ for (let i = 1; i <= 6 * 10 ** 6; i++) { // формируем строку бо
 }
 localStorage.setItem('key', str); // пытаемся записать в хранилище
 } catch {
-  alert('1. AAAAAAAAAa!')
+  alert('1. AAAAAAAAAa!');
 }
 
 
@@ -36,7 +36,7 @@ try {
 
 function sqr(a) {
   if (a>=0) {
-    return Math.sqrt(a)
+    return Math.sqrt(a);
   } else {
     		throw new Error('корень из отрицательного числа   получить НЕЛЬЗЯ!');
     	}

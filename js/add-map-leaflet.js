@@ -13,7 +13,7 @@ const myMap = L.map('map-canvas')
     lat: 35.6895,
     lng: 139.692,
   },
-    12
+  12
   );
 
 L.tileLayer(
@@ -92,8 +92,6 @@ const mapOnset = () => {
     lng: 139.692,
   }, 12);
 };
-
-
 
 export {
   createMarker,

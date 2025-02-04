@@ -8,7 +8,7 @@ import { showAlert } from './show-message.js';
 import { getData } from './api.js';
 import { createMarker } from './add-map-leaflet.js';
 
-import { DWELLING_COUNT_MAX } from './constants.js'
+import { DWELLING_COUNT_MAX } from './constants.js';
 import { formActivFilter } from './form-disabled.js';
 
 import './submit-form.js';
@@ -18,7 +18,7 @@ try {
   formActivFilter();
   console.log(data);
 
-  const DwellingArray = data.slice(0, DWELLING_COUNT_MAX)
+  const DwellingArray = data.slice(0, DWELLING_COUNT_MAX);
 
   DwellingArray.forEach((point) => {
     createMarker(point);

@@ -42,8 +42,6 @@ const createTemplate = (templateArray) => {
 		return fragm;
 	}
 
-	console.log(templateArray.author.avatar);
-
 	// author.src = templateArray.author.avatar;
 	avatar.src = verificationEnoughData(avatar, templateArray.author.avatar);
 
@@ -51,8 +49,8 @@ const createTemplate = (templateArray) => {
 
 	// location.textContent = `широта: ${verificationEnoughData(location, offer.location.lat)}, долгота: ${verificationEnoughData(location, templateArray.location.lng)}`;
 
-	location.textContent =  verificationEnoughData(location, templateArray.offer.address);
-	
+	location.textContent = verificationEnoughData(location, templateArray.offer.address);
+
 	price.textContent = `${verificationEnoughData(price, templateArray.offer.price)} ₽/ночь`;
 
 	type.textContent = TYPE_TRANSLATION[verificationEnoughData(type, templateArray.offer.type)];
@@ -75,7 +73,7 @@ const createTemplate = (templateArray) => {
 	lis.forEach((li) => {
 		if (verificationEnoughData(li, templateArray.offer.features)) {
 			const isNecessary = templateArray.offer.features.some(
-				(userFeatuers) => li.classList.contains(('popup__feature--' + userFeatuers))
+				(userFeatuers) => li.classList.contains((`popup__feature--${userFeatuers}`))
 			);
 			if (!isNecessary) {
 				li.remove();

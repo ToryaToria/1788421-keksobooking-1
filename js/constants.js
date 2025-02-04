@@ -22,9 +22,9 @@ const SubmitBtnText = {
   SUBMITTING: 'Отправляю...'
 };
 
- // ==================
+// ==================
 
- const DwellingOptions = {
+const DwellingOptions = {
   bungalow: 0,
   flat: 1000,
   hotel: 3000,
@@ -68,7 +68,7 @@ const FEATURES = [
 //   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 // ];
 
-const DWELLING_COUNT_MAX =  10;
+const DWELLING_COUNT_MAX = 10;
 
 export {
   DwellingOptions,
@@ -79,7 +79,7 @@ export {
   FEATURES,
 
   DWELLING_COUNT_MAX,
-  
+
   BASE_URL,
   Route,
   Methods,

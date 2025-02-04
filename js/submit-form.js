@@ -1,11 +1,11 @@
-import {pristineIsValid} from './valid-form.js'
-import {sendData} from './api.js'
+import {pristineIsValid} from './valid-form.js';
+import {sendData} from './api.js';
 import {
   showSuccessMessage,
   showErrorMessage
-} from './show-message.js'
+} from './show-message.js';
 import { SubmitBtnText } from './constants.js';
-import {mapOnset} from './add-map-leaflet.js'
+import {mapOnset} from './add-map-leaflet.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -41,5 +41,6 @@ const noBtnReset = (evt) => {
 
   mapOnset();
   adForm.reset();
-}
+};
+
 btnReset.addEventListener('click', noBtnReset);

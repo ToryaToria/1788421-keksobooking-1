@@ -1,32 +1,49 @@
-const TITLE = [
-  'Дом из бруса в 500 метрах от озера',
-  'Отапливаемый коттедж площадью 180 кв. м',
-  'Дом в конце улицы в тихом тупике',
-  'Жильё в деревне в экологически чистом районе',
-  'Оазис в центре города'
-];
+const BASE_URL = ' https://28.javascript.htmlacademy.pro/keksobooking';
 
-const DESCRIPTIONS = [
-  'Величественный и изысканный дворец',
-  'Дворец традиционно причисляют к елизаветинскому барокко',
-  'Резиденция османских султанов',
+const Route = {
+  GET_DATA: '/data',
+  SEND_DATA: '/',
+};
 
-  'Роскошная квартира вблизи кинотеатра ждет вас!',
-  'Улучшенная планировка, в отличном состоянии', 'Квартира теплая, расположена на солнечной стороне.',
-  'Убежище и источник вдохновения',
-  'В деревенском доме есть свой особый шарм, который создает уют и гармонию',
-  'Одноэтажное здание для одной семьи с большой террасой и реже мансардой',
-  'Сочетает в себе уют домашнего очага и комфорт современной обстановки.',
-  'Все номера выходят окнами на тихий закрытый двор'
-];
+const Methods = {
+  GET: 'GET',
+  POST: 'POST'
+};
 
-const TYPE = [
-  'palase',
-  'flat',
-  'house',
-  'bungalow',
-  'hotel'
-];
+const ErrorText = {
+  GET_DATA: 'Не удалось загрузить страницу. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте еще раз'
+};
+
+const ALERT_SHOW_TIME = 2000;
+
+const SubmitBtnText = {
+  IDLE: 'Опубликовать',
+  SUBMITTING: 'Отправляю...'
+};
+
+// ==================
+
+const DwellingOptions = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000
+};
+
+const SLIDER_MAX = 100000;
+const SLIDER_MIN = 0;
+
+const MIN_TITLE = 30;
+const MAX_TITLE = 100;
+
+const СapaCityOptions = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
 
 const TYPE_TRANSLATION = {
   palase: 'Дворец',
@@ -51,34 +68,34 @@ const FEATURES = [
   'conditioner'
 ];
 
-const PHOTOS = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-];
+// const PHOTOS = [
+//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+// ];
 
-const DWELLING_COUNT_MAX = 5;
-
-const LAT_COUNT_MIN = 35.65000;
-const LAT_COUNT_MAX = 35.70000;
-
-const LNG_COUNT_MIN = 139.70000;
-const LNG_COUNT_MAX = 139.80000;
-
-const DIGIT = 5;
+const DWELLING_COUNT_MAX = 10;
 
 export {
-  TITLE,
-  DESCRIPTIONS,
-  TYPE,
+  DwellingOptions,
+  СapaCityOptions,
+  SLIDER_MAX,
+  SLIDER_MIN,
+
+  MIN_TITLE,
+  MAX_TITLE,
+
   TYPE_TRANSLATION,
   CHECK,
   FEATURES,
-  PHOTOS,
+
   DWELLING_COUNT_MAX,
-  LAT_COUNT_MIN,
-  LAT_COUNT_MAX,
-  LNG_COUNT_MIN,
-  LNG_COUNT_MAX,
-  DIGIT
+
+  BASE_URL,
+  Route,
+  Methods,
+  ErrorText,
+
+  ALERT_SHOW_TIME,
+  SubmitBtnText
 };

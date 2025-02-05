@@ -1049,6 +1049,20 @@ fieldset {
   display: none;
 }
 
+/* класс для сообщееия об ощибке получения-отправки данных - добавила я - из кексограмма */
+ 
+.data-error {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: 10px 3px;
+  font-size: 20px;
+  text-align: center;
+  background-color: #fd4d4b;
+}
+
 
 /* класс для пристин - добавила я - надо убрать */
 .error-pristine {

@@ -103,8 +103,7 @@
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="title">Заголовок объявления</label>
           <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" required
-            data-pristine-required-message="Поле обязательно для заполнения" minlength="30"
-            data-pristine-minlength-message="заголовок не меньше 30 сомволов">
+            data-pristine-required-message="Поле обязательно для заполнения" >
         </fieldset>
 
         <fieldset class="ad-form__element ad-form__element--wide">
@@ -126,8 +125,7 @@
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
           <input id="price" name="price" type="number" placeholder="1000" required
-            data-pristine-required-message="Поле обязательно для заполнения" max="100000"
-            data-pristine-max-message="Цена не может быть больше 100000 руб.">
+            data-pristine-required-message="Поле обязательно для заполнения">
           <div class="ad-form__slider"></div>
         </fieldset>
 
@@ -214,8 +212,7 @@
   </main>
 
   <footer class="footer container">
-    <div class="footer__copyright copyright">
-      <a class="copyright__link copyright__link--image" href="https://htmlacademy.ru/intensive/javascript">
+    <div class="footer__https://github.com/ToryaToria/1788421-keksobooking-1/tree/module11-task1__link copyright__link--image" href="https://htmlacademy.ru/intensive/javascript">
         <img src="img/htmla-logo.svg" width="130" height="45" alt="HTML Academy" class="copyright__logo">
       </a>
       <p>Сделано в <a class="copyright__link copyright__link--text"
@@ -237,6 +234,7 @@
       <h4 class="popup__type">Квартира</h4>
       <p class="popup__text popup__text--capacity">2 комнаты для 3 гостей</p>
       <p class="popup__text popup__text--time">Заезд после 14:00, выезд до 10:00</p>
+      
       <ul class="popup__features">
         <li class="popup__feature popup__feature--wifi"></li>
         <li class="popup__feature popup__feature--dishwasher"></li>
@@ -245,6 +243,7 @@
         <li class="popup__feature popup__feature--elevator"></li>
         <li class="popup__feature popup__feature--conditioner"></li>
       </ul>
+      
       <p class="popup__description">Великолепная квартира-студия в центре Токио. Подходит как туристам, так и
         бизнесменам. Квартира полностью укомплектована и недавно отремонтирована.</p>
       <div class="popup__photos">
@@ -266,6 +265,13 @@
       <p class="error__message">Ошибка размещения объявления</p>
       <button type="button" class="error__button">Попробовать снова</button>
     </div>
+  </template>
+
+   <!-- Сообщение с ошибкой загрузки похожих объявлений -->
+   <template id="data-error">
+    <section class="data-error">
+      <h2 class="data-error__title">Не удалось загрузить данные</h2>
+    </section>
   </template>
 
 

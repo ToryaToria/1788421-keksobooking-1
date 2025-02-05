@@ -6,7 +6,7 @@ function createIdGenerator() {
 		namId = +namId + 1;
 
 		if (namId <= 9) {
-			return '0' + namId;
+			return `0${namId}`;
 		}
 		return namId;
 	};
@@ -27,17 +27,17 @@ function getRandomIntPointFloat(a, b, digits = 1) {
 	b = Math.abs(b);
 	digits = Math.abs(digits);
 
-	let min = Math.min(a, b); //  находим мин и макс, если пользователь ввел диапозон не в том порядке
-	let max = Math.max(a, b);
+	const min = Math.min(a, b); //  находим мин и макс, если пользователь ввел диапозон не в том порядке
+	const max = Math.max(a, b);
 
 	return +(Math.random() * (max - min) + min).toFixed(digits); // Максимум включаeтся, а минимум - нет; + - для преобразования строки в число
-};
+}
 
 //функция для алгоритма тасования Фишера-Йетса
 function shuffle(arr) {
-	let newArr = [...arr];
+	const newArr = [...arr];
 	for (let i = newArr.length - 1; i > 0; i--) {
-		let j = Math.floor(Math.random() * (i + 1));
+		const j = Math.floor(Math.random() * (i + 1));
 		[newArr[i], newArr[j]] = [newArr[j], newArr[i]];
 		//  Волшебство деструктуризации массивов
 	}

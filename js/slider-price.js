@@ -1,20 +1,22 @@
 // слайдер noUiSlider для поля "Цена"
 import {
-  DwellingOptions
+  DwellingOptions,
+  SLIDER_MAX,
+  SLIDER_MIN
 } from './constants.js';
-
 
 const sliderPrice = document.querySelector('.ad-form__slider');
 const inputPrice = document.querySelector('#price');
 const inputType = document.querySelector('#type');
 
+let flagSliderMax = false;
 
 noUiSlider.create(sliderPrice, {
   range: {
-    min: 0,
-    max: 100000,
+    min: SLIDER_MIN,
+    max: SLIDER_MAX,
   },
-  start: 1000,
+  start: DwellingOptions.flat,
   step: 1,
   connect: 'lower',
 
@@ -29,7 +31,9 @@ noUiSlider.create(sliderPrice, {
 });
 
 sliderPrice.noUiSlider.on('update', () => {
-  inputPrice.value = sliderPrice.noUiSlider.get();
+  if (!flagSliderMax) {
+    inputPrice.value = sliderPrice.noUiSlider.get();
+  }
 });
 
 function onInputTypeChange() {
@@ -43,10 +47,13 @@ function onInputTypeChange() {
 }
 
 function onInputPriceChange() {
+  const value = inputPrice.value;
+  if (!value.length) {
+    inputPrice.value = SLIDER_MIN;
+  }
+  flagSliderMax = Number(value) > SLIDER_MAX;
   sliderPrice.noUiSlider.set(inputPrice.value);
-  console.log(inputPrice.value);
 }
 
 inputType.addEventListener('change', onInputTypeChange);
-
 inputPrice.addEventListener('input', onInputPriceChange);

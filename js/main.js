@@ -16,7 +16,7 @@ import './submit-form.js';
 try {
   const data = await getData();
   formActivFilter();
-  console.log(data);
+  // console.log(data);
 
   const DwellingArray = data.slice(0, DWELLING_COUNT_MAX);
 

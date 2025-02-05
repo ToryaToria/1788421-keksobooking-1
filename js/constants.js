@@ -32,6 +32,12 @@ const DwellingOptions = {
   palace: 10000
 };
 
+const SLIDER_MAX = 100000;
+const SLIDER_MIN = 0;
+
+const MIN_TITLE = 30;
+const MAX_TITLE = 100;
+
 const СapaCityOptions = {
   1: ['1'],
   2: ['1', '2'],
@@ -73,6 +79,11 @@ const DWELLING_COUNT_MAX = 10;
 export {
   DwellingOptions,
   СapaCityOptions,
+  SLIDER_MAX,
+  SLIDER_MIN,
+
+  MIN_TITLE,
+  MAX_TITLE,
 
   TYPE_TRANSLATION,
   CHECK,

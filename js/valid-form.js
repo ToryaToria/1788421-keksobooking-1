@@ -1,28 +1,21 @@
 import {
   DwellingOptions,
-  СapaCityOptions
+  СapaCityOptions,
+  SLIDER_MAX,
+  MIN_TITLE,
+  MAX_TITLE
 } from './constants.js';
-
-const MIN_TITLE = 30;
-const MAX_TITLE = 100;
-const MAX_PRICE = 100000;
 
 const adForm = document.querySelector('.ad-form');
 const fildTitle = adForm.querySelector('#title');
 const fildPrice = adForm.querySelector('#price');
 
 const dwellingType = adForm.querySelector('#type');
-
 const dwellingPrice = adForm.querySelector('#price');
-
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
-
 const roomNumber = adForm.querySelector('#room_number');
-
 const capaCity = adForm.querySelector('#capacity');
-
-//+++++++++++++++++++++++++++
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
@@ -33,25 +26,19 @@ const pristine = new Pristine(adForm, {
 }
 );
 
-//++++++++++++++++++++++++++++++++++++++++++++++
-
 // функция проверки длины поля "Заголовок"
 function validateNickname(value) {
   return value.length >= MIN_TITLE && value.length <= MAX_TITLE;
 }
 
 // функция проверки максимума поля "Цена"
-function validatePrice(prise) {
-  return prise <= MAX_PRICE;
+function validatePrice(price) {
+  if (!price.length){
+    return true;
+  }
+  return price <= SLIDER_MAX;
 }
 
-// функция проверки поля "Цена" - только цифры!
-function validatePriceNumber(prise) {
-  const numbPattern = /\d/.test(prise);
-  return numbPattern;
-}
-
-//================================
 // функция проверки соответствия полей "тип жилья" и "цена"
 function validateDwellingTypePrice() {
   return dwellingPrice.value >= DwellingOptions[dwellingType.value];
@@ -113,20 +100,12 @@ pristine.addValidator(
   `Заголовок от ${MIN_TITLE} и до ${MAX_TITLE} символов`
 );
 
-// проверка цифр поля "Цена"
-pristine.addValidator(
-  fildPrice,
-  validatePriceNumber,
-  'Только цифры!',
-  1
-);
-
 // проверка максимума поля "Цена"
 pristine.addValidator(
   fildPrice,
   validatePrice,
-  `Цена не может быть больше ${MAX_PRICE} рублей`,
-  2
+  `Цена не может быть больше ${SLIDER_MAX} рублей`,
+  1
 );
 
 // проверка соответствия полей "тип жилья" и "цена"
@@ -134,7 +113,7 @@ pristine.addValidator(
   fildPrice,
   validateDwellingTypePrice,
   getDwellingErrorMessage,
-  3
+  2
 );
 
 // проверка соответствия полей "кол-во комнат" и "кол-во мест"

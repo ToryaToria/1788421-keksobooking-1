@@ -11,6 +11,7 @@ const errorBtn = errorMessage.querySelector('.error__button');
 const body = document.querySelector('body');
 
 const showAlert = (errMessage) => {
+  alert('AAAAAAAAAAA!')
   const dataErrorElem = dataErrorTemplate.cloneNode(true);
 
   if (errMessage) {

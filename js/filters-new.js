@@ -1,13 +1,20 @@
 // import { data } from "./main";
 
-// import { showAlert } from './show-message.js';
-// import { getData } from './api.js';
-// import { createMarker } from './add-map-leaflet.js';
+// import {
+//   onFilterTypeChange,
+//   onFilterPriceChange,
+//   onFilterRoomsChange,
+//   onFilterGuestsChange,
+// } from './filters.js'
 
-// import { DWELLING_COUNT_MAX } from './constants.js';
-// import { formActivFilter } from './form-disabled.js';
+import { showAlert } from './show-message.js';
+import { getData } from './api.js';
+import { createMarker } from './add-map-leaflet.js';
 
-// //=================
+import { DWELLING_COUNT_MAX } from './constants.js';
+import { formActivFilter } from './form-disabled.js';
+
+//=================
 
 const Prices = {
   low: 10000,
@@ -24,27 +31,40 @@ const housingRooms = filters.querySelector('#housing-rooms');
 
 const housingGuests = filters.querySelector('#housing-guests');
 
-// const housingFeatures = filters.querySelector('#housing-features');
+const housingFeatures = filters.querySelector('#housing-features');
+
+const checkboxFeatures = housingFeatures.querySelectorAll('input[type="checkbox"]');
+
 
 let housingDataArray = [];
 
-// try {
-//   const data = await getData();
-//   formActivFilter();
+try {
+  const data = await getData();
+  formActivFilter();
 
-//   const DwellingArray = data.slice(0, DWELLING_COUNT_MAX);
+  const DwellingArray = data.slice(0, DWELLING_COUNT_MAX);
 
-//   DwellingArray.forEach((point) => {
-//     createMarker(point);
-//   });
+  DwellingArray.forEach((point) => {
+    createMarker(point);
+  });
 
-//   housingDataArray = structuredClone(data);
+  housingDataArray = structuredClone(data);
 
-// } catch (err) {
-//   showAlert(err.message);
-// }
+} catch (err) {
+  showAlert(err.message);
+}
 
-// console.log(housingDataArray);
+console.log(housingDataArray);
+
+let model = {
+  ['housing-type']: 'any',
+  ['housing-price']: 'any',
+  ['housing-rooms']: 'any',
+  ['housing-guests']: 'any',
+  features: [],
+}
+
+// features: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
 
 //1. фильтрация по типу жилья
 const onFilterTypeChange = () => {
@@ -137,81 +157,53 @@ const onFilterGuestsChange = () => {
   return filterGuests;
 }
 
-// 5. фильтрация по удобствам
-
-// const onFilterFeaturesChange = (evt) => {
-//   let filterFeatures = [];
-
-//   const effect = evt.target.value;
-
-//   filterFeatures = housingDataArray.filter((item) => item.offer.features === effect);
-
-//   console.log(effect);
-//   console.log(filterFeatures);
-//   return filterFeatures;
-
-// }
-
-
-
-
-export {
-  onFilterTypeChange,
-  onFilterPriceChange,
-  onFilterRoomsChange,
-  onFilterGuestsChange,
-  // onFilterFeaturesChange
-
+// объект с функциями для фильтров
+const modelFilters = {
+  ['housing-type']: onFilterTypeChange,
+  ['housing-price']: onFilterPriceChange,
+  ['housing-rooms']: onFilterRoomsChange,
+  ['housing-guests']: onFilterGuestsChange,
+  // features: [],
 }
 
+console.log(model);
+
+const createModel = (evt) => {
+  const id = evt.target.id;
+  const click = evt.target.value;
+  let init = evt.target;
+  let n = 0;
+
+  console.log(click)
+  console.log(id);
+  console.log(init.type);
 
 
+  if (init.type === 'checkbox') {
+    if (init.checked) {
+      model.features.push(init.value)
+    }
 
+    if (!init.checked) {
+      let index = model.features.indexOf(init.value);
+      console.log(`удаление - ${index}`);
+      model.features.splice(index, 1);
+    }
+  } else {
+    model[id] = click;
+    modelFilters[id]();
+  }
 
-// const onFilterTypeChange = () => {
-//   model.type = housingType.value;
-//   console.log(model);
-// }
+  console.log(model);
 
-// const onFilterPriceChange = () => {
-//   model.price = housingPrice.value;
-//   console.log(model);
-// }
+  checkboxFeatures.forEach((elem) => {
+    if (elem.checked) {
+      n = n + 1;
+    }
+  })
+  console.log(n);
+}
 
-// const onFilterRoomsChange = () => {
-//   model.rooms = housingRooms.value;
-//   console.log(model);
-// }
+// ==================
 
-// const onFilterGuestsChange = () => {
-//   model.guests = housingGuests.value;
-//   console.log(model);
-// }
-
-// const onFilterFeaturesChange = function (evt) {
-//   let n = 0;
-//   let init = evt.target;
-// ['housing-price']: onFilterPriceChange,
-//   ['housing-rooms']: onFilterRoomsChange,
-//   ['housing-guests']
-//   checkboxFeatures.forEach((elem) => {
-//     if (elem.checked) {
-//       n = n + 1;
-//     }
-//   })
-
-//   if (init.checked) {
-//     model.features.push(init.value)
-//   }
-
-//   if (!init.checked) {
-//     let index = model.features.indexOf(init.value);
-//     console.log(`{удаление - ${index}`);
-//     model.features.splice(index, 1);
-//   }
-
-//   console.log(n);
-//   console.log(model.features);
-//   console.log(model);
-
-// };
+filters.addEventListener('change', createModel);

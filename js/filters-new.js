@@ -57,11 +57,11 @@ try {
 console.log(housingDataArray);
 
 let model = {
-  ['housing-type']: 'any',
-  ['housing-price']: 'any',
-  ['housing-rooms']: 'any',
-  ['housing-guests']: 'any',
-  features: [],
+  // ['housing-type']: 'any',
+  // ['housing-price']: 'any',
+  // ['housing-rooms']: 'any',
+  // ['housing-guests']: 'any',
+  // features: [],
 }
 
 // features: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
@@ -114,7 +114,7 @@ const onFilterPriceChange = () => {
 
     case 'high':
       filterPrice = housingDataArray.filter((item) => item.offer.price >= Prices.high);
-      
+
       console.log(price)
       console.log(filterPrice)
 
@@ -124,7 +124,7 @@ const onFilterPriceChange = () => {
 
 // 3. фильтрация по комнатам
 const onFilterRoomsChange = () => {
-let filterRooms = [];
+  let filterRooms = [];
 
   if (housingRooms.value === 'any') {
     filterRooms = housingDataArray;
@@ -133,7 +133,7 @@ let filterRooms = [];
     return filterRooms;
   }
 
-   filterRooms = housingDataArray.filter((item) => item.offer.rooms === Number(housingRooms.value));
+  filterRooms = housingDataArray.filter((item) => item.offer.rooms === Number(housingRooms.value));
   console.log(housingRooms.value);
   console.log(filterRooms);
   return filterRooms;
@@ -157,16 +157,45 @@ const onFilterGuestsChange = () => {
   return filterGuests;
 }
 
+// 5. фильтрация по удобствам
+const onFilterFeaturesChange = (checkbox) => {
+  let filterFeatures = [];
+// let checkbox = evt.target;
+console.log(checkbox);
+
+// const arr = [1, 2, 3, 4];
+// console.log(arr.includes(2))
+
+  filterFeatures = housingDataArray.filter((item) => {
+    console.log(item.offer.features[1]);
+
+  // for (let i = 0; i<= arr.length; i++) {
+  //   console.log(arr[i]);
+  // }
+    // console.log( arr.includes('wifi'))
+    // console.log(arr.isArray());
+    // item.offer.features === checkbox.value
+  });
+
+  // console.log(filterFeatures);
+  // return filterFeatures;
+}
+
 // объект с функциями для фильтров
 const modelFilters = {
   ['housing-type']: onFilterTypeChange,
   ['housing-price']: onFilterPriceChange,
   ['housing-rooms']: onFilterRoomsChange,
   ['housing-guests']: onFilterGuestsChange,
+  ['filter-wifi']: onFilterFeaturesChange,
+  ['filter-dishwasher']: onFilterFeaturesChange, ['filter-parking']: onFilterFeaturesChange,
+  ['filter-washer']: onFilterFeaturesChange,
+  ['filter-elevator']: onFilterFeaturesChange,
+  ['filter-conditioner']: onFilterFeaturesChange,
   // features: [],
 }
 
-console.log(model);
+// console.log(model);
 
 const createModel = (evt) => {
   const id = evt.target.id;
@@ -178,20 +207,33 @@ const createModel = (evt) => {
   console.log(id);
   console.log(init.type);
 
-
   if (init.type === 'checkbox') {
     if (init.checked) {
-      model.features.push(init.value)
+      model[id] = click;
+      // model.features.push(init.value)
+      modelFilters[id](init); // здесь добавить ф-цию фильтраци
     }
-
     if (!init.checked) {
-      let index = model.features.indexOf(init.value);
-      console.log(`удаление - ${index}`);
-      model.features.splice(index, 1);
+      // let index = model.features.indexOf(init.value);
+
+      // console.log(`удаление - ${index}`);
+      // model.features.splice(index, 1);
+
+      delete model[id];
+
     }
   } else {
     model[id] = click;
-    modelFilters[id]();
+
+    if (model[id] === 'any') {
+      //ничего не фильтруем - массив без изменений
+
+      // filterType = housingDataArray
+      // console.log(housingType.value);
+      // console.log(filterType);
+      // return filterType;
+    }
+    modelFilters[id](); // фильтруем с reduce
   }
 
   console.log(model);

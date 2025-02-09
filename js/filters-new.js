@@ -1,12 +1,3 @@
-// import { data } from "./main";
-
-// import {
-//   onFilterTypeChange,
-//   onFilterPriceChange,
-//   onFilterRoomsChange,
-//   onFilterGuestsChange,
-// } from './filters.js'
-
 import { showAlert } from './show-message.js';
 import { getData } from './api.js';
 import { createMarker } from './add-map-leaflet.js';

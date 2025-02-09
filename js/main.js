@@ -13,6 +13,8 @@ import './slider-price.js';
 
 import './submit-form.js';
 import './filters-new.js';
+import './add-photo.js';
+
 
 // try {
 //   const data = await getData();

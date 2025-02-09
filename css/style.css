@@ -549,8 +549,10 @@ fieldset {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+
+  /* wrap - убрала я */
+  /* -ms-flex-wrap: wrap;
+      flex-wrap: wrap; */
 }
 
 .ad-form__upload {
@@ -598,11 +600,26 @@ fieldset {
 }
 
 .ad-form__photo {
-  margin-right: 10px;
-  margin-bottom: 10px;
+/* добавила я - для загруженых фоточек */
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
+/* яяяяя */
 
-  width: 70px;
-  height: 70px;
+padding: 10px;
+
+
+/* вообще не понятно зачем? */
+  /* margin-right: 10px;
+  margin-bottom: 10px; */
+
+  /* было - просто без min */
+  min-width: 70px; 
+  min-height: 70px;
+
+  max-width: 295px;
 
   background-color: #e4e4de;
   border-radius: 5px;
@@ -1072,4 +1089,9 @@ fieldset {
   text-transform: uppercase;
   padding: 10px;
   width: calc(100% - 20px);
+}
+
+/* класс для изображений - добавила я - надо убрать? */
+.ad-form-header__img  {
+  object-fit: contain;
 }

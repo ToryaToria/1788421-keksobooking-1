@@ -1,4 +1,4 @@
-const BASE_URL = ' https://28.javascript.htmlacademy.pro/keksobooking';
+const BASE_URL = ' https://25.javascript.htmlacademy.pro/keksobooking';
 
 const Route = {
   GET_DATA: '/data',
@@ -68,13 +68,10 @@ const FEATURES = [
   'conditioner'
 ];
 
-// const PHOTOS = [
-//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-// ];
-
 const DWELLING_COUNT_MAX = 10;
+
+const FileTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
 
 export {
   DwellingOptions,
@@ -97,5 +94,7 @@ export {
   ErrorText,
 
   ALERT_SHOW_TIME,
-  SubmitBtnText
+  SubmitBtnText,
+
+  FileTypes
 };

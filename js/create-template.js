@@ -86,4 +86,5 @@ const createTemplate = (templateArray) => {
 
 export {
 	createTemplate,
+	// cerateImgs
 };

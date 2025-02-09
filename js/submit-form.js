@@ -6,6 +6,7 @@ import {
 } from './show-message.js';
 import { SubmitBtnText } from './constants.js';
 import {mapOnset} from './add-map-leaflet.js';
+import {imgReset} from './add-photo.js'
 
 const adForm = document.querySelector('.ad-form');
 
@@ -27,6 +28,8 @@ adForm.addEventListener('submit', async (evt) => {
       showSuccessMessage();
       adForm.reset();
       mapOnset();
+      imgReset();
+
     } catch {
       showErrorMessage();
     }
@@ -41,6 +44,7 @@ const noBtnReset = (evt) => {
 
   mapOnset();
   adForm.reset();
+  imgReset();
 };
 
 btnReset.addEventListener('click', noBtnReset);

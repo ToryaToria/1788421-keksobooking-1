@@ -22,8 +22,6 @@ const SubmitBtnText = {
   SUBMITTING: 'Отправляю...'
 };
 
-// ==================
-
 const DwellingOptions = {
   bungalow: 0,
   flat: 1000,
@@ -75,6 +73,20 @@ const FileTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 const RERENDER_DELAY = 500;
 const NOT_FOUND_OFFERS_DELAY = 3000;
 
+const PriceFilter = {
+  low: {
+    start: 0,
+    end: 10000,
+  },
+  middle: {
+    start: 10000,
+    end: 50000,
+  },
+  high: {
+    start: 50000,
+    end: 1000000,
+  },
+};
 
 export {
   DwellingOptions,
@@ -101,5 +113,6 @@ export {
 
   FileTypes,
   RERENDER_DELAY,
-  NOT_FOUND_OFFERS_DELAY
+  NOT_FOUND_OFFERS_DELAY,
+  PriceFilter
 };

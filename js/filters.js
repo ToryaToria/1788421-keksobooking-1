@@ -1,217 +1,125 @@
-// import { data } from "./main";
+import { showAlert } from './show-message.js';
+import { getData } from './api.js';
+import { createMarker } from './add-map-leaflet.js';
+import {
+  DWELLING_COUNT_MAX,
+  NOT_FOUND_OFFERS_DELAY,
+  PriceFilter
+} from './constants.js';
+import { formActivFilter } from './form-disabled.js';
+import {
+  debouncedRenderMarkers,
+  renderSimilarMarkers
+} from './add-map-leaflet.js';
 
-// import { showAlert } from './show-message.js';
-// import { getData } from './api.js';
-// import { createMarker } from './add-map-leaflet.js';
-
-// import { DWELLING_COUNT_MAX } from './constants.js';
-// import { formActivFilter } from './form-disabled.js';
-
-// //=================
-
-const Prices = {
-  low: 10000,
-  high: 50000
-}
-
-const filters = document.querySelector('.map__filters');
-
-const housingType = filters.querySelector('#housing-type');
-
-const housingPrice = filters.querySelector('#housing-price');
-
-const housingRooms = filters.querySelector('#housing-rooms');
-
-const housingGuests = filters.querySelector('#housing-guests');
-
-// const housingFeatures = filters.querySelector('#housing-features');
+const body = document.body;
+const filtersForm = document.querySelector('.map__filters');
+const housingType = filtersForm.querySelector('#housing-type');
+const housingPrice = filtersForm.querySelector('#housing-price');
+const housingRooms = filtersForm.querySelector('#housing-rooms');
+const housingGuests = filtersForm.querySelector('#housing-guests');
+const housingFeatures = filtersForm.querySelector('#housing-features');
+const checkboxFeatures = housingFeatures.querySelectorAll('.map__checkbox');
 
 let housingDataArray = [];
 
-// try {
-//   const data = await getData();
-//   formActivFilter();
+try {
+  const data = await getData();
+  formActivFilter();
 
-//   const DwellingArray = data.slice(0, DWELLING_COUNT_MAX);
+  const DwellingArray = data.slice(0, DWELLING_COUNT_MAX);
 
-//   DwellingArray.forEach((point) => {
-//     createMarker(point);
-//   });
+  DwellingArray.forEach((point) => {
+    createMarker(point);
+  });
+  renderSimilarMarkers(DwellingArray);
+  housingDataArray = structuredClone(data);
+} catch (err) {
+  showAlert(err.message);
+}
 
-//   housingDataArray = structuredClone(data);
-
-// } catch (err) {
-//   showAlert(err.message);
-// }
+const resetFilters = () => {
+  filtersForm.reset();
+  // const filteredData = setFilters();
+  // console.log(filteredData);
+  renderSimilarMarkers(housingDataArray.slice(0, DWELLING_COUNT_MAX));
+};
 
 // console.log(housingDataArray);
 
-//1. фильтрация по типу жилья
-const onFilterTypeChange = () => {
-  let filterType = [];
-
-  if (housingType.value === 'any') {
-    filterType = housingDataArray
-    console.log(housingType.value);
-    console.log(filterType);
-    return filterType;
+const filterByType = (item) => {
+  const value = housingType.value;
+  if (value === 'any') {
+    return true;
   }
+  return value === item.offer.type;
+};
 
-  filterType = housingDataArray.filter((item) => item.offer.type === housingType.value);
-  console.log(housingType.value);
-  console.log(filterType);
-  return filterType
+const filterByPrice = (item) => {
+  const value = housingPrice.value;
+  if (value === 'any') {
+    return true;
+  }
+  return item.offer.price >= PriceFilter[value].start && item.offer.price <= PriceFilter[value].end;
+};
+
+const filterByRoom = (item) => {
+  const value = housingRooms.value;
+  if (value === 'any') {
+    return true;
+  }
+  return +value === item.offer.rooms;
+};
+
+const filterByGuest = (item) => {
+  const value = housingGuests.value;
+  if (value === 'any') {
+    return true;
+  }
+  return +value === item.offer.guests;
+};
+
+const filterByFeatures = (item) => {
+  const checkedFeatures = Array.from(checkboxFeatures)
+    .filter((feature) => feature.checked);
+
+  return checkedFeatures.every((feature) => {
+    if (!item.offer.features) {
+      return false;
+    }
+    return item.offer.features.includes(feature.value);
+  });
+};
+
+const showNotFoundOffersMessage = () => {
+  const divEl = document.createElement('div');
+  divEl.classList.add('no-simmilar-offers');
+  divEl.textContent = 'Подходящих обьявлений не найдено. Попробуйте изменить фильтры для поиска';
+  body.append(divEl);
+
+  setTimeout(() => {
+    divEl.remove();
+  }, NOT_FOUND_OFFERS_DELAY);
+};
+
+function setFilters() {
+  const filteredData = housingDataArray.filter((item) =>
+    filterByType(item) &&
+    filterByPrice(item) &&
+    filterByRoom(item) &&
+    filterByGuest(item) &&
+    filterByFeatures(item)
+  ).slice(0, DWELLING_COUNT_MAX);
+
+  if (filteredData.length === 0) {
+    showNotFoundOffersMessage();
+  }
+  debouncedRenderMarkers(filteredData);
+  return filteredData;
 }
 
-// 2. фильтрация по цене
-const onFilterPriceChange = () => {
-  let price = housingPrice.value;
-  let filterPrice = [];
-
-  if (price === 'any') {
-    filterPrice = housingDataArray;
-    console.log(price)
-    console.log(filterPrice);
-    return filterPrice;
-  }
-
-  switch (price) {
-    case 'middle':
-      filterPrice = housingDataArray.filter((item) => item.offer.price > Prices.low && item.offer.price < Prices.high);
-
-      console.log(price)
-      console.log(filterPrice);
-
-      return filterPrice;
-
-    case 'low':
-      filterPrice = housingDataArray.filter((item) => item.offer.price <= Prices.low);
-
-      console.log(price)
-      console.log(filterPrice)
-
-      return filterPrice;
-
-    case 'high':
-      filterPrice = housingDataArray.filter((item) => item.offer.price >= Prices.high);
-      
-      console.log(price)
-      console.log(filterPrice)
-
-      return filterPrice;
-  }
-}
-
-// 3. фильтрация по комнатам
-const onFilterRoomsChange = () => {
-let filterRooms = [];
-
-  if (housingRooms.value === 'any') {
-    filterRooms = housingDataArray;
-    console.log(housingRooms.value)
-    console.log(filterRooms);
-    return filterRooms;
-  }
-
-   filterRooms = housingDataArray.filter((item) => item.offer.rooms === Number(housingRooms.value));
-  console.log(housingRooms.value);
-  console.log(filterRooms);
-  return filterRooms;
-}
-
-// 4. фильтрация по гостям
-const onFilterGuestsChange = () => {
-  let filterGuests = [];
-
-  if (housingGuests.value === 'any') {
-    filterGuests = housingDataArray;
-    console.log(housingGuests.value)
-    console.log(filterGuests);
-    return filterGuests;
-  }
-
-  filterGuests = housingDataArray.filter((item) => item.offer.guests === Number(housingGuests.value));
-
-  console.log(housingGuests.value);
-  console.log(filterGuests);
-  return filterGuests;
-}
-
-// 5. фильтрация по удобствам
-
-// const onFilterFeaturesChange = (evt) => {
-//   let filterFeatures = [];
-
-//   const effect = evt.target.value;
-
-//   filterFeatures = housingDataArray.filter((item) => item.offer.features === effect);
-
-//   console.log(effect);
-//   console.log(filterFeatures);
-//   return filterFeatures;
-
-// }
-
-
-
+filtersForm.addEventListener('change', setFilters);
 
 export {
-  onFilterTypeChange,
-  onFilterPriceChange,
-  onFilterRoomsChange,
-  onFilterGuestsChange,
-  // onFilterFeaturesChange
-
-}
-
-
-
-
-
-// const onFilterTypeChange = () => {
-//   model.type = housingType.value;
-//   console.log(model);
-// }
-
-// const onFilterPriceChange = () => {
-//   model.price = housingPrice.value;
-//   console.log(model);
-// }
-
-// const onFilterRoomsChange = () => {
-//   model.rooms = housingRooms.value;
-//   console.log(model);
-// }
-
-// const onFilterGuestsChange = () => {
-//   model.guests = housingGuests.value;
-//   console.log(model);
-// }
-
-// const onFilterFeaturesChange = function (evt) {
-//   let n = 0;
-//   let init = evt.target;
-// ['housing-price']: onFilterPriceChange,
-//   ['housing-rooms']: onFilterRoomsChange,
-//   ['housing-guests']
-//   checkboxFeatures.forEach((elem) => {
-//     if (elem.checked) {
-//       n = n + 1;
-//     }
-//   })
-
-//   if (init.checked) {
-//     model.features.push(init.value)
-//   }
-
-//   if (!init.checked) {
-//     let index = model.features.indexOf(init.value);
-//     console.log(`{удаление - ${index}`);
-//     model.features.splice(index, 1);
-//   }
-
-//   console.log(n);
-//   console.log(model.features);
-//   console.log(model);
-
-// };
+  resetFilters
+};

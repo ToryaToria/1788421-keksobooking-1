@@ -7,7 +7,7 @@ import {
 import { SubmitBtnText } from './constants.js';
 import {mapOnset} from './add-map-leaflet.js';
 import {imgReset} from './add-photo.js';
-import {resetFilters} from './filters-nwe2.js'
+import {resetFilters} from './filters.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -23,7 +23,6 @@ adForm.addEventListener('submit', async (evt) => {
 
   if (pristineIsValid()) {
     toggleSubmitBtn(true);
-    // alert('отправляю форму');
     try {
       await sendData(new FormData(adForm));
       showSuccessMessage();
@@ -43,7 +42,6 @@ const btnReset = document.querySelector('.ad-form__reset');
 
 const noBtnReset = (evt) => {
   evt.preventDefault();
-
   mapOnset();
   adForm.reset();
   imgReset();

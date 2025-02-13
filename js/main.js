@@ -12,7 +12,7 @@ import './slider-price.js';
 // import { formActivFilter } from './form-disabled.js';
 
 import './submit-form.js';
-import './filters-nwe2.js';
+import './filters.js';
 import './add-photo.js';
 
 

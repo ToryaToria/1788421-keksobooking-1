@@ -1,7 +1,7 @@
 import { createTemplate } from './create-template.js';
-import {debounce} from './util.js'
+import {debounce} from './util.js';
 import { formActivForm } from './form-disabled.js';
-import {RERENDER_DELAY} from './constants.js'
+import {RERENDER_DELAY} from './constants.js';
 
 const fieldAddrwss = document.querySelector('#address');
 
@@ -51,7 +51,6 @@ mainMarker.on('moveend', (evt) => {
   const lat = address.lat.toFixed(5);
   const lng = address.lng.toFixed(5);
 
-  // добваить координаты в поле
   fieldAddrwss.value = `широта: ${lat},   долгота: ${lng}`;
 });
 
@@ -66,7 +65,7 @@ const markerGroup = L.layerGroup().addTo(myMap);
 const createMarker = (point) => {
   const lat = point.location.lat;
   const lng = point.location.lng;
-  
+
   const marker = L.marker(
     {
       lat,

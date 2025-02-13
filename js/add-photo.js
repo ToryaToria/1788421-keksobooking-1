@@ -15,10 +15,10 @@ const onAvaChange = () => {
   const fileName = file.name.toLowerCase();
   const epxFile = fileName.split('.').pop();
   const trueFileType = FileTypes.includes(epxFile);
-  console.log(trueFileType);
+  // console.log(trueFileType);
 
   if (trueFileType) {
-    console.log(file)
+    // console.log(file)
     const url = URL.createObjectURL(file);
     imgElementAva.src = url;
   } else {
@@ -28,23 +28,23 @@ const onAvaChange = () => {
 };
 
 const onMiniFotosChange = () => {
-  console.log('hi');
+  // console.log('hi');
 
   const file = imgFieldImgs.files[0];
 
   const fileName = file.name.toLowerCase();
   const epxFile = fileName.split('.').pop();
   const trueFileType = FileTypes.includes(epxFile);
-  console.log(trueFileType);
+  // console.log(trueFileType);
 
   if (trueFileType) {
-    console.log(file)
+    // console.log(file)
     const url = URL.createObjectURL(file);
     // imgElementImgs.src = url;
 
     const img = document.createElement('img');
     // как создать тег?
-    img.alt = `фоточка`; // какое здесь описание?
+    img.alt = 'фоточка'; // какое здесь описание?
     img.src = url;
     img.width = 45;
     img.height = 45;
@@ -62,7 +62,7 @@ const onMiniFotosChange = () => {
 const imgReset = () => {
   imgElementAva.src = 'img/muffin-grey.svg';
   imgElementImgs.innerHTML = '';
-}
+};
 
 imgFieldAva.addEventListener('change', onAvaChange);
 

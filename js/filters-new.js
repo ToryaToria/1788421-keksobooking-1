@@ -55,14 +55,7 @@ const Filters = {
   ['housing-type']: 'type',
   ['housing-price']: 'price',
   ['housing-rooms']: 'rooms',
-  ['housing-guests']: 'guests',
-
-  // ['filter-wifi']: 'wifi',
-  // ['filter-dishwasher']: 'dishwasher', ['filter-parking']: 'parking',
-  // ['filter-washer']: 'washer',
-  // ['filter-elevator']: 'elevator',
-  // ['filter-conditioner']: 'conditioner',
-  // features: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
+ ['housing-guests']: 'guests',
 }
 
 const onFilterChange = (filtered, clicked, init) => {

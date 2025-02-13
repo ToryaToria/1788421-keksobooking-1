@@ -72,6 +72,9 @@ const DWELLING_COUNT_MAX = 10;
 
 const FileTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
+const RERENDER_DELAY = 500;
+const NOT_FOUND_OFFERS_DELAY = 3000;
+
 
 export {
   DwellingOptions,
@@ -96,5 +99,7 @@ export {
   ALERT_SHOW_TIME,
   SubmitBtnText,
 
-  FileTypes
+  FileTypes,
+  RERENDER_DELAY,
+  NOT_FOUND_OFFERS_DELAY
 };

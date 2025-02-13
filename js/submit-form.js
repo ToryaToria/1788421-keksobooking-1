@@ -6,7 +6,8 @@ import {
 } from './show-message.js';
 import { SubmitBtnText } from './constants.js';
 import {mapOnset} from './add-map-leaflet.js';
-import {imgReset} from './add-photo.js'
+import {imgReset} from './add-photo.js';
+import {resetFilters} from './filters-nwe2.js'
 
 const adForm = document.querySelector('.ad-form');
 
@@ -29,6 +30,7 @@ adForm.addEventListener('submit', async (evt) => {
       adForm.reset();
       mapOnset();
       imgReset();
+      resetFilters();
 
     } catch {
       showErrorMessage();
@@ -45,6 +47,7 @@ const noBtnReset = (evt) => {
   mapOnset();
   adForm.reset();
   imgReset();
+  resetFilters();
 };
 
 btnReset.addEventListener('click', noBtnReset);

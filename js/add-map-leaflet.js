@@ -1,6 +1,7 @@
 import { createTemplate } from './create-template.js';
-
+import {debounce} from './util.js'
 import { formActivForm } from './form-disabled.js';
+import {RERENDER_DELAY} from './constants.js'
 
 const fieldAddrwss = document.querySelector('#address');
 
@@ -65,9 +66,7 @@ const markerGroup = L.layerGroup().addTo(myMap);
 const createMarker = (point) => {
   const lat = point.location.lat;
   const lng = point.location.lng;
-  // console.log(typeof lat, lng);
-  // console.log(point);
-
+  
   const marker = L.marker(
     {
       lat,
@@ -93,7 +92,18 @@ const mapOnset = () => {
   }, 12);
 };
 
+const renderSimilarMarkers = (data) => {
+  markerGroup.clearLayers();
+  myMap.closePopup();
+  data.forEach((similarAd) => createMarker(similarAd));
+};
+
+const debouncedRenderMarkers = debounce((data) => renderSimilarMarkers(data), RERENDER_DELAY);
+
+
 export {
   createMarker,
-  mapOnset
+  mapOnset,
+  debouncedRenderMarkers,
+  renderSimilarMarkers
 };

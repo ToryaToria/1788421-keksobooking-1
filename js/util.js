@@ -51,10 +51,19 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 const createRandomArray = (arr) => shuffle(arr).slice(0, getRandomInteger(1, arr.length));
 
 
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export {
 	createIdGenerator,
 	getRandomInteger,
 	getRandomIntPointFloat,
 	getRandomArrayElement,
-	createRandomArray
+	createRandomArray,
+	debounce
 };

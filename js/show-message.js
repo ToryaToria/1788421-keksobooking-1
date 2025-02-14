@@ -11,7 +11,6 @@ const errorBtn = errorMessage.querySelector('.error__button');
 const body = document.querySelector('body');
 
 const showAlert = (errMessage) => {
-  // alert('AAAAAAAAAAA!')
   const dataErrorElem = dataErrorTemplate.cloneNode(true);
 
   if (errMessage) {
@@ -24,8 +23,6 @@ const showAlert = (errMessage) => {
   }, ALERT_SHOW_TIME
   );
 };
-
-//=======================
 
 let messageElem = successMessage;
 

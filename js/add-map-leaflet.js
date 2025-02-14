@@ -7,7 +7,6 @@ const fieldAddrwss = document.querySelector('#address');
 
 const myMap = L.map('map-canvas')
   .on('load', () => {
-    // console.log('Карта инициализирована');
     formActivForm();
   })
   .setView({
@@ -98,7 +97,6 @@ const renderSimilarMarkers = (data) => {
 };
 
 const debouncedRenderMarkers = debounce((data) => renderSimilarMarkers(data), RERENDER_DELAY);
-
 
 export {
   createMarker,

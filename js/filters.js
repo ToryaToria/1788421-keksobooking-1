@@ -34,18 +34,17 @@ try {
   });
   renderSimilarMarkers(DwellingArray);
   housingDataArray = structuredClone(data);
+
+  filtersForm.addEventListener('change', setFilters);
+
 } catch (err) {
   showAlert(err.message);
 }
 
 const resetFilters = () => {
   filtersForm.reset();
-  // const filteredData = setFilters();
-  // console.log(filteredData);
   renderSimilarMarkers(housingDataArray.slice(0, DWELLING_COUNT_MAX));
 };
-
-// console.log(housingDataArray);
 
 const filterByType = (item) => {
   const value = housingType.value;
@@ -118,8 +117,7 @@ function setFilters() {
   return filteredData;
 }
 
-filtersForm.addEventListener('change', setFilters);
-
 export {
-  resetFilters
+  resetFilters,
+  setFilters
 };

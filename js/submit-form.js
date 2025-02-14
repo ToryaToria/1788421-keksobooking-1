@@ -10,7 +10,6 @@ import {imgReset} from './add-photo.js';
 import {resetFilters} from './filters.js';
 
 const adForm = document.querySelector('.ad-form');
-
 const submitBtn = document.querySelector('.ad-form__submit');
 
 const toggleSubmitBtn = (isDisabled) => {
@@ -30,7 +29,6 @@ adForm.addEventListener('submit', async (evt) => {
       mapOnset();
       imgReset();
       resetFilters();
-
     } catch {
       showErrorMessage();
     }

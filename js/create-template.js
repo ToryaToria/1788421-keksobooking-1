@@ -1,90 +1,80 @@
 import {
-	TYPE_TRANSLATION
+  TYPE_TRANSLATION
 } from './constants.js';
 
 const template = document.querySelector('#card').content;
 
-// const container = document.querySelector('#map-canvas');
-
 const verificationEnoughData = (block, value) => {
-	if (value) {
-		return value;
-	}
-	block.remove();
+  if (value) {
+    return value;
+  }
+  block.remove();
 };
 
 const createTemplate = (templateArray) => {
-	//клонирую шаблон
-	const templateNode = template.cloneNode(true);
+  const templateNode = template.cloneNode(true);
 
-	//создаю переменные для тегов
-	const avatar = templateNode.querySelector('.popup__avatar');
-	const title = templateNode.querySelector('.popup__title');
-	const location = templateNode.querySelector('.popup__text--address');
-	const price = templateNode.querySelector('.popup__text--price');
-	const type = templateNode.querySelector('.popup__type');
-	const capacity = templateNode.querySelector('.popup__text--capacity');
-	const time = templateNode.querySelector('.popup__text--time');
-	const lis = templateNode.querySelectorAll('.popup__feature');
-	const descript = templateNode.querySelector('.popup__description');
-	const photos = templateNode.querySelector('.popup__photos');
-	const photo = templateNode.querySelector('.popup__photo');
+  const avatar = templateNode.querySelector('.popup__avatar');
+  const title = templateNode.querySelector('.popup__title');
+  const location = templateNode.querySelector('.popup__text--address');
+  const price = templateNode.querySelector('.popup__text--price');
+  const type = templateNode.querySelector('.popup__type');
+  const capacity = templateNode.querySelector('.popup__text--capacity');
+  const time = templateNode.querySelector('.popup__text--time');
+  const lis = templateNode.querySelectorAll('.popup__feature');
+  const descript = templateNode.querySelector('.popup__description');
+  const photos = templateNode.querySelector('.popup__photos');
+  const photo = templateNode.querySelector('.popup__photo');
 
-	// функция генерации фоточек
-	function cerateImgs(arr) {
-		const fragm = document.createDocumentFragment();
-		for (let i = 0; i < arr.length; i++) {
-			const img = photo.cloneNode(true);
-			img.alt = `фоточка ${i}`;
-			img.src = arr[i];
-			fragm.append(img);
-		}
-		return fragm;
-	}
+  // функция генерации фоточек
+  function cerateImgs(arr) {
+    const fragm = document.createDocumentFragment();
+    for (let i = 0; i < arr.length; i++) {
+      const img = photo.cloneNode(true);
+      img.alt = `фоточка ${i}`;
+      img.src = arr[i];
+      fragm.append(img);
+    }
+    return fragm;
+  }
+  avatar.src = verificationEnoughData(avatar, templateArray.author.avatar);
 
-	// author.src = templateArray.author.avatar;
-	avatar.src = verificationEnoughData(avatar, templateArray.author.avatar);
+  title.textContent = verificationEnoughData(title, templateArray.offer.title);
 
-	title.textContent = verificationEnoughData(title, templateArray.offer.title);
+  location.textContent = verificationEnoughData(location, templateArray.offer.address);
 
-	// location.textContent = `широта: ${verificationEnoughData(location, offer.location.lat)}, долгота: ${verificationEnoughData(location, templateArray.location.lng)}`;
+  price.textContent = `${verificationEnoughData(price, templateArray.offer.price)} ₽/ночь`;
 
-	location.textContent = verificationEnoughData(location, templateArray.offer.address);
+  type.textContent = TYPE_TRANSLATION[verificationEnoughData(type, templateArray.offer.type)];
 
-	price.textContent = `${verificationEnoughData(price, templateArray.offer.price)} ₽/ночь`;
+  capacity.textContent = `${verificationEnoughData(capacity, templateArray.rooms)} комнаты для ${verificationEnoughData(capacity, templateArray.guests)} гостей`;
 
-	type.textContent = TYPE_TRANSLATION[verificationEnoughData(type, templateArray.offer.type)];
+  time.textContent = `Заезд после ${verificationEnoughData(time, templateArray.offer.checkin)}, выезд до ${verificationEnoughData(time, templateArray.offer.checkout)}`;
 
-	capacity.textContent = `${verificationEnoughData(capacity, templateArray.rooms)} комнаты для ${verificationEnoughData(capacity, templateArray.guests)} гостей`;
+  descript.textContent = verificationEnoughData(descript, templateArray.offer.description);
 
-	time.textContent = `Заезд после ${verificationEnoughData(time, templateArray.offer.checkin)}, выезд до ${verificationEnoughData(time, templateArray.offer.checkout)}`;
+  //заполнение фоточек
+  //очистить всё внутри чтобы img-шаблон не попадал в разметку
+  photos.innerHTML = '';
+  if (verificationEnoughData(photos, templateArray.offer.photos)) {
+    const images = cerateImgs(templateArray.offer.photos);
+    photos.append(images);
+  }
 
-	descript.textContent = verificationEnoughData(descript, templateArray.offer.description);
-
-	//заполнение фоточек
-	//очистить всё внутри чтобы img-шаблон не попадал в разметку
-	photos.innerHTML = '';
-	if (verificationEnoughData(photos, templateArray.offer.photos)) {
-		const images = cerateImgs(templateArray.offer.photos);
-		photos.append(images);
-	}
-
-	// заполнение features
-	lis.forEach((li) => {
-		if (verificationEnoughData(li, templateArray.offer.features)) {
-			const isNecessary = templateArray.offer.features.some(
-				(userFeatuers) => li.classList.contains((`popup__feature--${userFeatuers}`))
-			);
-			if (!isNecessary) {
-				li.remove();
-			}
-		}
-	});
-
-	return templateNode;
+  // заполнение features
+  lis.forEach((li) => {
+    if (verificationEnoughData(li, templateArray.offer.features)) {
+      const isNecessary = templateArray.offer.features.some(
+        (userFeatuers) => li.classList.contains((`popup__feature--${userFeatuers}`))
+      );
+      if (!isNecessary) {
+        li.remove();
+      }
+    }
+  });
+  return templateNode;
 };
 
 export {
-	createTemplate,
-	// cerateImgs
+  createTemplate,
 };

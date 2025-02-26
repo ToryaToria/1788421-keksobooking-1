@@ -26,12 +26,10 @@ const pristine = new Pristine(adForm, {
 }
 );
 
-// функция проверки длины поля "Заголовок"
 function validateNickname(value) {
   return value.length >= MIN_TITLE && value.length <= MAX_TITLE;
 }
 
-// функция проверки максимума поля "Цена"
 function validatePrice(price) {
   if (!price.length){
     return true;
@@ -39,23 +37,18 @@ function validatePrice(price) {
   return price <= SLIDER_MAX;
 }
 
-// функция проверки соответствия полей "тип жилья" и "цена"
 function validateDwellingTypePrice() {
   return dwellingPrice.value >= DwellingOptions[dwellingType.value];
 }
 
-// функция генерации сообщения об ошибке для ф-ции validateDwellingTypePrice
 function getDwellingErrorMessage() {
   return `Минимальная цена ${DwellingOptions[dwellingType.value]} рублей`;
 }
 
-// функция для обработчика события "change" на поле "Тип жилья"
 function onDwellingTypeChange() {
   dwellingPrice.placeholder = DwellingOptions[this.value];
 }
 
-//================================
-// функции синхронизации полей "заезд" и "выезд" - повесить на "change" для полей "заезд" и "выезд"
 function timingInOut() {
   timeOut.value = timeIn.value;
 }
@@ -67,19 +60,15 @@ function timingOutIn() {
 timeIn.addEventListener('change', timingInOut);
 timeOut.addEventListener('change', timingOutIn);
 
-//================================
-// ф-ция проверки соответствия поля "кол-во гостей"
 function validatecapaCity() {
   return СapaCityOptions[roomNumber.value].includes(capaCity.value);
 }
 
-// функция генерации сообщения об ошибке для ф-ции validatecapaCity
 function getcapaCityErrorMessage() {
 
   if (roomNumber.value !== '100' && capaCity.value === '0') {
     return 'Нельзя выбрать "Не для гостей!"';
   }
-
   switch (roomNumber.value) {
     case '1':
       return 'Не больше 1 гостя!';
@@ -92,15 +81,12 @@ function getcapaCityErrorMessage() {
   }
 }
 
-//++++++++++++ ПРОВЕРКИ +++++++++++++++++
-// проверка поля "Заголовок"
 pristine.addValidator(
   fildTitle,
   validateNickname,
   `Заголовок от ${MIN_TITLE} и до ${MAX_TITLE} символов`
 );
 
-// проверка максимума поля "Цена"
 pristine.addValidator(
   fildPrice,
   validatePrice,
@@ -108,7 +94,6 @@ pristine.addValidator(
   1
 );
 
-// проверка соответствия полей "тип жилья" и "цена"
 pristine.addValidator(
   fildPrice,
   validateDwellingTypePrice,
@@ -116,13 +101,11 @@ pristine.addValidator(
   2
 );
 
-// проверка соответствия полей "кол-во комнат" и "кол-во мест"
 pristine.addValidator(
   capaCity,
   validatecapaCity,
   getcapaCityErrorMessage
 );
-//+++++++++++++++++++++
 
 dwellingType.addEventListener('change', onDwellingTypeChange);
 

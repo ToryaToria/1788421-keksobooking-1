@@ -606,23 +606,18 @@ fieldset {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  /* яяяяя */
-
   padding: 10px;
-
-
-  /* вообще не понятно зачем? */
-  /* margin-right: 10px;
-  margin-bottom: 10px; */
-
   /* было - просто без min */
   min-width: 70px;
   min-height: 70px;
-
   max-width: 295px;
 
   background-color: #e4e4de;
   border-radius: 5px;
+}
+
+.ad-form__photo img {
+  object-fit: cover;
 }
 
 .ad-form__element--submit {
@@ -1066,7 +1061,7 @@ fieldset {
   display: none;
 }
 
-/* класс для сообщееия об ощибке получения-отправки данных - добавила я - из кексограмма */
+/* класс для сообщееия об ощибке получения-отправки данных - добавила я */
 
 .data-error {
   position: absolute;
@@ -1077,26 +1072,26 @@ fieldset {
   padding: 10px 3px;
   font-size: 20px;
   text-align: center;
-  background-color: #fd4d4b;
+  background-color: #ff5635;
 }
 
 
-/* класс для пристин - добавила я - надо убрать */
+/* класс для пристин - добавила я */
 .error-pristine {
   box-sizing: border-box;
-  color: #ff0000;
+  color: #ff5635;
   background-color: #ffff00;
   text-transform: uppercase;
   padding: 10px;
   width: calc(100% - 20px);
 }
 
-/* класс для изображений - добавила я - надо убрать? */
+/* класс для аватарки - добавила я */
 .ad-form-header__img {
-  object-fit: contain;
+  object-fit: cover;
 }
 
-/* класс для сообщения для фильтров - добавила я - надо убрать? */
+/* класс для сообщения для фильтров - добавила я */
 .no-simmilar-offers {
   box-sizing: border-box;
   position: fixed;

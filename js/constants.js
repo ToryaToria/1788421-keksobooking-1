@@ -1,4 +1,4 @@
-const BASE_URL = ' https://25.javascript.htmlacademy.pro/keksobooking';
+const BASE_URL = ' https://28.javascript.htmlacademy.pro/keksobooking';
 
 const Route = {
   GET_DATA: '/data',
@@ -15,7 +15,7 @@ const ErrorText = {
   SEND_DATA: 'Не удалось отправить форму. Попробуйте еще раз'
 };
 
-const ALERT_SHOW_TIME = 2000;
+const ALERT_SHOW_TIME = 3000;
 
 const SubmitBtnText = {
   IDLE: 'Опубликовать',

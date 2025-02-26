@@ -6,9 +6,10 @@ import {
 } from './show-message.js';
 import { SubmitBtnText } from './constants.js';
 import {mapOnset} from './add-map-leaflet.js';
+import {imgReset} from './add-photo.js';
+import {resetFilters} from './filters.js';
 
 const adForm = document.querySelector('.ad-form');
-
 const submitBtn = document.querySelector('.ad-form__submit');
 
 const toggleSubmitBtn = (isDisabled) => {
@@ -21,12 +22,13 @@ adForm.addEventListener('submit', async (evt) => {
 
   if (pristineIsValid()) {
     toggleSubmitBtn(true);
-    // alert('отправляю форму');
     try {
       await sendData(new FormData(adForm));
       showSuccessMessage();
       adForm.reset();
       mapOnset();
+      imgReset();
+      resetFilters();
     } catch {
       showErrorMessage();
     }
@@ -38,9 +40,10 @@ const btnReset = document.querySelector('.ad-form__reset');
 
 const noBtnReset = (evt) => {
   evt.preventDefault();
-
   mapOnset();
   adForm.reset();
+  imgReset();
+  resetFilters();
 };
 
 btnReset.addEventListener('click', noBtnReset);

@@ -15,14 +15,12 @@ const ErrorText = {
   SEND_DATA: 'Не удалось отправить форму. Попробуйте еще раз'
 };
 
-const ALERT_SHOW_TIME = 2000;
+const ALERT_SHOW_TIME = 3000;
 
 const SubmitBtnText = {
   IDLE: 'Опубликовать',
   SUBMITTING: 'Отправляю...'
 };
-
-// ==================
 
 const DwellingOptions = {
   bungalow: 0,
@@ -68,13 +66,27 @@ const FEATURES = [
   'conditioner'
 ];
 
-// const PHOTOS = [
-//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-//   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-// ];
-
 const DWELLING_COUNT_MAX = 10;
+
+const FileTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+const RERENDER_DELAY = 500;
+const NOT_FOUND_OFFERS_DELAY = 3000;
+
+const PriceFilter = {
+  low: {
+    start: 0,
+    end: 10000,
+  },
+  middle: {
+    start: 10000,
+    end: 50000,
+  },
+  high: {
+    start: 50000,
+    end: 1000000,
+  },
+};
 
 export {
   DwellingOptions,
@@ -97,5 +109,10 @@ export {
   ErrorText,
 
   ALERT_SHOW_TIME,
-  SubmitBtnText
+  SubmitBtnText,
+
+  FileTypes,
+  RERENDER_DELAY,
+  NOT_FOUND_OFFERS_DELAY,
+  PriceFilter
 };

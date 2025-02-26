@@ -1,4 +1,3 @@
-// слайдер noUiSlider для поля "Цена"
 import {
   DwellingOptions,
   SLIDER_MAX,
@@ -37,7 +36,6 @@ sliderPrice.noUiSlider.on('update', () => {
 });
 
 function onInputTypeChange() {
-
   const start = DwellingOptions[this.value];
   inputPrice.placeholder = start;
 

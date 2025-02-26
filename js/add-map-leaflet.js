@@ -1,12 +1,12 @@
 import { createTemplate } from './create-template.js';
-
+import {debounce} from './util.js';
 import { formActivForm } from './form-disabled.js';
+import {RERENDER_DELAY} from './constants.js';
 
 const fieldAddrwss = document.querySelector('#address');
 
 const myMap = L.map('map-canvas')
   .on('load', () => {
-    // console.log('Карта инициализирована');
     formActivForm();
   })
   .setView({
@@ -50,7 +50,6 @@ mainMarker.on('moveend', (evt) => {
   const lat = address.lat.toFixed(5);
   const lng = address.lng.toFixed(5);
 
-  // добваить координаты в поле
   fieldAddrwss.value = `широта: ${lat},   долгота: ${lng}`;
 });
 
@@ -65,8 +64,6 @@ const markerGroup = L.layerGroup().addTo(myMap);
 const createMarker = (point) => {
   const lat = point.location.lat;
   const lng = point.location.lng;
-  // console.log(typeof lat, lng);
-  // console.log(point);
 
   const marker = L.marker(
     {
@@ -93,7 +90,17 @@ const mapOnset = () => {
   }, 12);
 };
 
+const renderSimilarMarkers = (data) => {
+  markerGroup.clearLayers();
+  myMap.closePopup();
+  data.forEach((similarAd) => createMarker(similarAd));
+};
+
+const debouncedRenderMarkers = debounce((data) => renderSimilarMarkers(data), RERENDER_DELAY);
+
 export {
   createMarker,
-  mapOnset
+  mapOnset,
+  debouncedRenderMarkers,
+  renderSimilarMarkers
 };

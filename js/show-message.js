@@ -24,8 +24,6 @@ const showAlert = (errMessage) => {
   );
 };
 
-//=======================
-
 let messageElem = successMessage;
 
 const onDocumentKeydown = (evt) => {

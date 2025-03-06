@@ -1,19 +1,25 @@
 import { createTemplate } from './create-template.js';
-import {debounce} from './util.js';
+import { debounce } from './util.js';
 import { formActivForm } from './form-disabled.js';
-import {RERENDER_DELAY} from './constants.js';
+import {
+  RERENDER_DELAY,
+  LAT,
+  LNG,
+  ZOOM
+} from './constants.js';
 
-const fieldAddrwss = document.querySelector('#address');
+const fieldAddress = document.querySelector('#address');
 
 const myMap = L.map('map-canvas')
   .on('load', () => {
+    // console.log('карта загрузилась');
     formActivForm();
   })
   .setView({
-    lat: 35.6895,
-    lng: 139.692,
+    lat: LAT,
+    lng: LNG,
   },
-  12
+  ZOOM
   );
 
 L.tileLayer(
@@ -31,8 +37,8 @@ const mainIcon = L.icon({
 
 const mainMarker = L.marker(
   {
-    lat: 35.6895,
-    lng: 139.692,
+    lat: LAT,
+    lng: LNG,
   },
   {
     draggable: true,
@@ -42,7 +48,7 @@ const mainMarker = L.marker(
 
 mainMarker.addTo(myMap);
 
-fieldAddrwss.value = `широта: ${mainMarker.getLatLng().lat},   долгота: ${mainMarker.getLatLng().lng}`;
+fieldAddress.value = `${mainMarker.getLatLng().lat},   ${mainMarker.getLatLng().lng}`;
 
 mainMarker.on('moveend', (evt) => {
   const address = evt.target.getLatLng();
@@ -50,9 +56,8 @@ mainMarker.on('moveend', (evt) => {
   const lat = address.lat.toFixed(5);
   const lng = address.lng.toFixed(5);
 
-  fieldAddrwss.value = `широта: ${lat},   долгота: ${lng}`;
+  fieldAddress.value = `${lat},   ${lng}`;
 });
-
 const icon = L.icon({
   iconUrl: '../img/pin.svg',
   iconSize: [40, 40],
@@ -79,18 +84,22 @@ const createMarker = (point) => {
 };
 
 const mapOnset = () => {
+  // console.log('главный маркер')
   mainMarker.setLatLng({
-    lat: 35.6895,
-    lng: 139.692,
+    lat: LAT,
+    lng: LNG,
   });
 
+  fieldAddress.value = `${LAT},   ${LNG}`;
+
   myMap.setView({
-    lat: 35.6895,
-    lng: 139.692,
-  }, 12);
+    lat: LAT,
+    lng: LNG,
+  }, ZOOM);
 };
 
 const renderSimilarMarkers = (data) => {
+  // console.log('рендер маркеров')
   markerGroup.clearLayers();
   myMap.closePopup();
   data.forEach((similarAd) => createMarker(similarAd));

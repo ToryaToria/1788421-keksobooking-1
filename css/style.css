@@ -1105,3 +1105,11 @@ fieldset {
   padding: 20px;
   z-index: 5;
 }
+
+/* #price::placeholder {
+  color: red;
+}
+
+#price {
+color: blueviolet;
+} */

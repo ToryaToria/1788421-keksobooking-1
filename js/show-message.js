@@ -29,14 +29,14 @@ let messageElem = successMessage;
 const onDocumentKeydown = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    hideMessage();
+    onMessageHide();
   }
 };
 
-function hideMessage() {
+function onMessageHide() {
   messageElem.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
-  body.removeEventListener('click', hideMessage);
+  body.removeEventListener('click', onMessageHide);
 }
 
 const showSuccessMessage = () => {
@@ -44,7 +44,7 @@ const showSuccessMessage = () => {
 
   body.append(messageElem);
   document.addEventListener('keydown', onDocumentKeydown);
-  body.addEventListener('click', hideMessage);
+  body.addEventListener('click', onMessageHide);
 
 };
 
@@ -53,8 +53,8 @@ const showErrorMessage = () => {
 
   body.append(messageElem);
   document.addEventListener('keydown', onDocumentKeydown);
-  body.addEventListener('click', hideMessage);
-  errorBtn.addEventListener('click', hideMessage);
+  body.addEventListener('click', onMessageHide);
+  errorBtn.addEventListener('click', onMessageHide);
 };
 
 export {

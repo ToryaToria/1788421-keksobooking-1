@@ -88,6 +88,10 @@ const PriceFilter = {
   },
 };
 
+const LAT = 35.6895;
+const LNG = 139.692;
+const ZOOM = 12;
+
 export {
   DwellingOptions,
   СapaCityOptions,
@@ -114,5 +118,9 @@ export {
   FileTypes,
   RERENDER_DELAY,
   NOT_FOUND_OFFERS_DELAY,
-  PriceFilter
+  PriceFilter,
+
+  LAT,
+  LNG,
+  ZOOM
 };

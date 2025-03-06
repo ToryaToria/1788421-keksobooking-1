@@ -118,7 +118,7 @@
 
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text">
+          <input id="address" name="address" type="text" readonly required data-pristine-required-message="Поле обязательно для заполнения">
         </fieldset>
 
         <fieldset class="ad-form__element">
@@ -134,7 +134,7 @@
 
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="1000" required
+          <input id="price" name="price" type="number" placeholder="200" required
             data-pristine-required-message="Поле обязательно для заполнения">
           <div class="ad-form__slider"></div>
         </fieldset>

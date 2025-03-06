@@ -1,6 +1,5 @@
 import { showAlert } from './show-message.js';
 import { getData } from './api.js';
-import { createMarker } from './add-map-leaflet.js';
 import {
   DWELLING_COUNT_MAX,
   NOT_FOUND_OFFERS_DELAY,
@@ -21,29 +20,25 @@ const housingGuests = filtersForm.querySelector('#housing-guests');
 const housingFeatures = filtersForm.querySelector('#housing-features');
 const checkboxFeatures = housingFeatures.querySelectorAll('.map__checkbox');
 
-let housingDataArray = [];
+let housingData = [];
+let dwellings = [] ;
 
 try {
   const data = await getData();
+  dwellings = data.slice(0, DWELLING_COUNT_MAX);
+
+  renderSimilarMarkers(dwellings);
   formActivFilter();
-
-  const DwellingArray = data.slice(0, DWELLING_COUNT_MAX);
-
-  DwellingArray.forEach((point) => {
-    createMarker(point);
-  });
-  renderSimilarMarkers(DwellingArray);
-  housingDataArray = structuredClone(data);
-
-  filtersForm.addEventListener('change', setFilters);
+  housingData = data;
 
 } catch (err) {
   showAlert(err.message);
 }
 
+
 const resetFilters = () => {
   filtersForm.reset();
-  renderSimilarMarkers(housingDataArray.slice(0, DWELLING_COUNT_MAX));
+  renderSimilarMarkers(dwellings);
 };
 
 const filterByType = (item) => {
@@ -91,18 +86,18 @@ const filterByFeatures = (item) => {
 };
 
 const showNotFoundOffersMessage = () => {
-  const divEl = document.createElement('div');
-  divEl.classList.add('no-simmilar-offers');
-  divEl.textContent = 'Подходящих обьявлений не найдено. Попробуйте изменить фильтры для поиска';
-  body.append(divEl);
+  const divElement = document.createElement('div');
+  divElement.classList.add('no-simmilar-offers');
+  divElement.textContent = 'Подходящих обьявлений не найдено. Попробуйте изменить фильтры для поиска';
+  body.append(divElement);
 
   setTimeout(() => {
-    divEl.remove();
+    divElement.remove();
   }, NOT_FOUND_OFFERS_DELAY);
 };
 
-function setFilters() {
-  const filteredData = housingDataArray.filter((item) =>
+const onFiltersChange = () => {
+  const filteredData = housingData.filter((item) =>
     filterByType(item) &&
     filterByPrice(item) &&
     filterByRoom(item) &&
@@ -115,9 +110,10 @@ function setFilters() {
   }
   debouncedRenderMarkers(filteredData);
   return filteredData;
-}
+};
+
+filtersForm.addEventListener('change', onFiltersChange);
 
 export {
-  resetFilters,
-  setFilters
+  resetFilters
 };

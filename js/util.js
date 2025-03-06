@@ -6,6 +6,14 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
+const verificationEnoughData = (block, value) => {
+  if (value !== undefined) {
+    return value;
+  }
+  block.remove();
+};
+
 export {
-  debounce
+  debounce,
+  verificationEnoughData
 };

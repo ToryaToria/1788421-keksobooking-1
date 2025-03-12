@@ -8,6 +8,9 @@ import {
   ZOOM
 } from './constants.js';
 
+// LAT = LAT.toFixed(5)
+  // LNG = LNG.toFixed(5)
+
 const fieldAddress = document.querySelector('#address');
 
 const myMap = L.map('map-canvas')
@@ -48,15 +51,15 @@ const mainMarker = L.marker(
 
 mainMarker.addTo(myMap);
 
-fieldAddress.value = `${mainMarker.getLatLng().lat},   ${mainMarker.getLatLng().lng}`;
+fieldAddress.value = `${mainMarker.getLatLng().lat.toFixed(5)},   ${mainMarker.getLatLng().lng.toFixed(5)}`;
 
 mainMarker.on('moveend', (evt) => {
   const address = evt.target.getLatLng();
 
   const lat = address.lat.toFixed(5);
   const lng = address.lng.toFixed(5);
-
-  fieldAddress.value = `${lat},   ${lng}`;
+ 
+    fieldAddress.value = `${lat},   ${lng}`;
 });
 const icon = L.icon({
   iconUrl: '../img/pin.svg',
@@ -84,13 +87,12 @@ const createMarker = (point) => {
 };
 
 const mapOnset = () => {
-  // console.log('главный маркер')
   mainMarker.setLatLng({
     lat: LAT,
     lng: LNG,
   });
 
-  fieldAddress.value = `${LAT},   ${LNG}`;
+  fieldAddress.value = `${LAT.toFixed(5)},   ${LNG.toFixed(5)}`;
 
   myMap.setView({
     lat: LAT,
@@ -99,7 +101,6 @@ const mapOnset = () => {
 };
 
 const renderSimilarMarkers = (data) => {
-  // console.log('рендер маркеров')
   markerGroup.clearLayers();
   myMap.closePopup();
   data.forEach((similarAd) => createMarker(similarAd));

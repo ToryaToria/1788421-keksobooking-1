@@ -13,26 +13,24 @@ const formDisabled = () => {
   selects.forEach((elem) => {
     elem.disabled = true;
   });
-
 };
 
-const formActivForm = () => {
+const activeForm = () => {
   formAdd.classList.remove('ad-form--disabled');
   fieldsets.forEach((elem) => {
     elem.disabled = false;
   });
 };
 
-const formActivFilter = () => {
+const activeFilter = () => {
   mapFilters.classList.remove('ad-form--disabled');
   selects.forEach((elem) => {
     elem.disabled = false;
   });
 };
 
-formDisabled();
-
 export {
-  formActivFilter,
-  formActivForm,
+  formDisabled,
+  activeForm,
+  activeFilter
 };

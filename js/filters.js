@@ -1,15 +1,13 @@
-import { showAlert } from './show-message.js';
-import { getData } from './api.js';
 import {
   DWELLING_COUNT_MAX,
   NOT_FOUND_OFFERS_DELAY,
-  PriceFilter
+  PriceFilter,
+  RERENDER_DELAY
 } from './constants.js';
-import { formActivFilter } from './form-disabled.js';
 import {
-  debouncedRenderMarkers,
   renderSimilarMarkers
 } from './add-map-leaflet.js';
+import { debounce } from './util.js';
 
 const body = document.body;
 const filtersForm = document.querySelector('.map__filters');
@@ -21,20 +19,14 @@ const housingFeatures = filtersForm.querySelector('#housing-features');
 const checkboxFeatures = housingFeatures.querySelectorAll('.map__checkbox');
 
 let housingData = [];
-let dwellings = [] ;
+let dwellings = [];
 
-try {
-  const data = await getData();
+const initFilter = (data) => {
+  housingData = [...data];
   dwellings = data.slice(0, DWELLING_COUNT_MAX);
 
   renderSimilarMarkers(dwellings);
-  formActivFilter();
-  housingData = data;
-
-} catch (err) {
-  showAlert(err.message);
-}
-
+};
 
 const resetFilters = () => {
   filtersForm.reset();
@@ -108,12 +100,16 @@ const onFiltersChange = () => {
   if (filteredData.length === 0) {
     showNotFoundOffersMessage();
   }
-  debouncedRenderMarkers(filteredData);
-  return filteredData;
+
+  renderSimilarMarkers(filteredData);
 };
 
-filtersForm.addEventListener('change', onFiltersChange);
+filtersForm.addEventListener('change', debounce(() => {
+  onFiltersChange();
+},
+RERENDER_DELAY));
 
 export {
-  resetFilters
+  resetFilters,
+  initFilter
 };

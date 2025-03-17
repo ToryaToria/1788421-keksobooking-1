@@ -11,6 +11,8 @@ import { SubmitBtnText } from './constants.js';
 import { mapOnset } from './add-map-leaflet.js';
 import { imgReset } from './add-photo.js';
 import { resetFilters } from './filters.js';
+import './slider-price.js';
+
 
 const adForm = document.querySelector('.ad-form');
 const submitButton = document.querySelector('.ad-form__submit');
@@ -47,4 +49,10 @@ adForm.addEventListener('submit', async (evt) => {
   }
 });
 
-buttonReset.addEventListener('click', onButtonReset);
+const initFofm = () => {
+  buttonReset.addEventListener('click', onButtonReset);
+};
+
+export {
+  initFofm
+};

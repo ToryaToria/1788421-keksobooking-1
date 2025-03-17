@@ -1,36 +1,32 @@
 import { createTemplate } from './create-template.js';
-import { debounce } from './util.js';
-import { formActivForm } from './form-disabled.js';
 import {
-  RERENDER_DELAY,
   LAT,
   LNG,
   ZOOM
 } from './constants.js';
 
-// LAT = LAT.toFixed(5)
-  // LNG = LNG.toFixed(5)
-
 const fieldAddress = document.querySelector('#address');
 
-const myMap = L.map('map-canvas')
-  .on('load', () => {
-    // console.log('карта загрузилась');
-    formActivForm();
-  })
-  .setView({
-    lat: LAT,
-    lng: LNG,
-  },
-  ZOOM
-  );
+const myMap = L.map('map-canvas');
 
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(myMap);
+const loadMap = () => new Promise((resolve) => {
+  myMap.on('load', () => {
+    resolve();
+  })
+    .setView({
+      lat: LAT,
+      lng: LNG,
+    },
+    ZOOM
+    );
+
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(myMap);
+});
 
 const mainIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
@@ -58,8 +54,8 @@ mainMarker.on('moveend', (evt) => {
 
   const lat = address.lat.toFixed(5);
   const lng = address.lng.toFixed(5);
- 
-    fieldAddress.value = `${lat},   ${lng}`;
+
+  fieldAddress.value = `${lat},   ${lng}`;
 });
 const icon = L.icon({
   iconUrl: '../img/pin.svg',
@@ -106,11 +102,9 @@ const renderSimilarMarkers = (data) => {
   data.forEach((similarAd) => createMarker(similarAd));
 };
 
-const debouncedRenderMarkers = debounce((data) => renderSimilarMarkers(data), RERENDER_DELAY);
-
 export {
+  loadMap,
   createMarker,
   mapOnset,
-  debouncedRenderMarkers,
   renderSimilarMarkers
 };

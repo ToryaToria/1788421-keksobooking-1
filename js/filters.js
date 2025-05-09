@@ -1,115 +1,73 @@
+// переделаные фильтры
 import {
-  DWELLING_COUNT_MAX,
-  NOT_FOUND_OFFERS_DELAY,
+  ANY,
   PriceFilter,
+  FILTER,
+  FEATURES_NAME,
   RERENDER_DELAY
 } from './constants.js';
 import {
   renderSimilarMarkers
 } from './add-map-leaflet.js';
+
 import { debounce } from './util.js';
 
-const body = document.body;
-const filtersForm = document.querySelector('.map__filters');
-const housingType = filtersForm.querySelector('#housing-type');
-const housingPrice = filtersForm.querySelector('#housing-price');
-const housingRooms = filtersForm.querySelector('#housing-rooms');
-const housingGuests = filtersForm.querySelector('#housing-guests');
-const housingFeatures = filtersForm.querySelector('#housing-features');
-const checkboxFeatures = housingFeatures.querySelectorAll('.map__checkbox');
+const filterForm = document.querySelector('.map__filters')
+let model = {};
+let points = [];
 
-let housingData = [];
-let dwellings = [];
+const isSelectedAll = (value) => value === ANY || (Array.isArray(value) && !value.length);
 
-const initFilter = (data) => {
-  housingData = [...data];
-  dwellings = data.slice(0, DWELLING_COUNT_MAX);
+const FilterSettings = {
+  [FILTER.TYPE]: (data, value) => data.filter((item) => item.offer.type === value),
+  [FILTER.PRICE]: (data, value) => data.filter((item) => item.offer.price >= PriceFilter[value].start && item.offer.price < PriceFilter[value].end),
+  [FILTER.ROOMS]: (data, value) => data.filter((item) => Number(value) === item.offer.rooms),
+  [FILTER.GUESTS]: (data, value) => data.filter((item) => Number(value) === item.offer.guests),
+  [FILTER.FEATURES]: (data, value) => data.filter((item) => value.every((element) =>
+    item.offer.features && Array.isArray(item.offer.features)
+      ? item.offer.features.includes(element)
+      : false))
+}
 
-  renderSimilarMarkers(dwellings);
-};
+const filterData = () => Object.keys(model).reduce((acc, key) =>
+  isSelectedAll(model[key])
+    ? acc :
+    FilterSettings[key](acc, model[key]), points);
 
-const resetFilters = () => {
-  filtersForm.reset();
-  renderSimilarMarkers(dwellings);
-};
-
-const filterByType = (item) => {
-  const value = housingType.value;
-  if (value === 'any') {
-    return true;
+const updateModel = (name, value) => {
+  if (name === FEATURES_NAME) {
+    model[FILTER.FEATURES] = [];
+    document.querySelectorAll('[name="features"]:checked').forEach((feature) => {
+      model[FILTER.FEATURES].push(feature.value)
+    });
+  } else {
+    model[name] = value;
   }
-  return value === item.offer.type;
 };
 
-const filterByPrice = (item) => {
-  const value = housingPrice.value;
-  if (value === 'any') {
-    return true;
-  }
-  return item.offer.price >= PriceFilter[value].start && item.offer.price <= PriceFilter[value].end;
+filterForm.addEventListener('change', ({ target }) => {
+  updateModel(target.name, target.value)
+
+
+
+  debounce(() => {
+    console.log('debounce уже');
+    renderSimilarMarkers(filterData().slice(0, 10));
+  },
+    RERENDER_DELAY);
+
+  // renderSimilarMarkers(filterData().slice(0, 10))
+});
+
+export const initFilter = (data) => {
+  console.log('filter');
+  points = [...data];
 };
 
-const filterByRoom = (item) => {
-  const value = housingRooms.value;
-  if (value === 'any') {
-    return true;
-  }
-  return +value === item.offer.rooms;
+
+export const resetFilters = () => {
+  model = {};
+  renderSimilarMarkers(points.slice(0, 10));
+  filterForm.reset();
 };
 
-const filterByGuest = (item) => {
-  const value = housingGuests.value;
-  if (value === 'any') {
-    return true;
-  }
-  return +value === item.offer.guests;
-};
-
-const filterByFeatures = (item) => {
-  const checkedFeatures = Array.from(checkboxFeatures)
-    .filter((feature) => feature.checked);
-
-  return checkedFeatures.every((feature) => {
-    if (!item.offer.features) {
-      return false;
-    }
-    return item.offer.features.includes(feature.value);
-  });
-};
-
-const showNotFoundOffersMessage = () => {
-  const divElement = document.createElement('div');
-  divElement.classList.add('no-simmilar-offers');
-  divElement.textContent = 'Подходящих обьявлений не найдено. Попробуйте изменить фильтры для поиска';
-  body.append(divElement);
-
-  setTimeout(() => {
-    divElement.remove();
-  }, NOT_FOUND_OFFERS_DELAY);
-};
-
-const onFiltersChange = () => {
-  const filteredData = housingData.filter((item) =>
-    filterByType(item) &&
-    filterByPrice(item) &&
-    filterByRoom(item) &&
-    filterByGuest(item) &&
-    filterByFeatures(item)
-  ).slice(0, DWELLING_COUNT_MAX);
-
-  if (filteredData.length === 0) {
-    showNotFoundOffersMessage();
-  }
-
-  renderSimilarMarkers(filteredData);
-};
-
-filtersForm.addEventListener('change', debounce(() => {
-  onFiltersChange();
-},
-RERENDER_DELAY));
-
-export {
-  resetFilters,
-  initFilter
-};

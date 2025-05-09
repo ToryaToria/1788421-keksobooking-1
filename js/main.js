@@ -1,5 +1,5 @@
 
-import { loadMap } from './add-map-leaflet.js';
+import { loadMap, renderSimilarMarkers } from './add-map-leaflet.js';
 import { getData } from './api.js';
 import { initFilter } from './filters.js';
 import { activeFilter, activeForm, formDisabled } from './form-disabled.js';
@@ -13,6 +13,8 @@ loadMap()
     initFofm();
     getData()
       .then((data) => {
+        renderSimilarMarkers(data.slice(0, 10));
+        console.log(data);
         initFilter(data);
         activeFilter();
       })

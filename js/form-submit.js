@@ -13,7 +13,6 @@ import { imgReset } from './add-photo.js';
 import { resetFilters } from './filters.js';
 import './slider-price.js';
 
-
 const adForm = document.querySelector('.ad-form');
 const submitButton = document.querySelector('.ad-form__submit');
 const buttonReset = document.querySelector('.ad-form__reset');

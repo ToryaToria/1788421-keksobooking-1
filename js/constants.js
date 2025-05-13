@@ -44,7 +44,7 @@ const СapaCityOptions = {
 };
 
 const TYPE_TRANSLATION = {
-  palase: 'Дворец',
+  palace: 'Дворец',
   flat: 'Квартира',
   house: 'Дом',
   bungalow: 'Бунгало',
@@ -91,6 +91,18 @@ const PriceFilter = {
 const LAT = 35.6895;
 const LNG = 139.692;
 const ZOOM = 12;
+
+export const FILTER = {
+TYPE: 'housing-type',
+PRICE: 'housing-price',
+ROOMS: 'housing-rooms',
+GUESTS: 'housing-guests',
+FEATURES: 'housing-features'
+};
+
+export const ANY = 'any';
+
+export const FEATURES_NAME = 'features';
 
 export {
   DwellingOptions,

@@ -1,4 +1,6 @@
-import { ALERT_SHOW_TIME } from './constants.js';
+import { ALERT_SHOW_TIME,
+  NOT_FOUND_OFFERS_DELAY
+ } from './constants.js';
 
 const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 
@@ -57,8 +59,20 @@ const showErrorMessage = () => {
   errorBtn.addEventListener('click', onMessageHide);
 };
 
+const showNotFoundOffersMessage = () => {
+  const divElement = document.createElement('div');
+  divElement.classList.add('no-simmilar-offers');
+  divElement.textContent = 'Подходящих обьявлений не найдено. Попробуйте изменить фильтры для поиска';
+  body.append(divElement);
+
+  setTimeout(() => {
+    divElement.remove();
+  }, NOT_FOUND_OFFERS_DELAY);
+};
+
 export {
   showAlert,
   showSuccessMessage,
-  showErrorMessage
+  showErrorMessage,
+  showNotFoundOffersMessage
 };

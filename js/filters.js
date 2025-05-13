@@ -6,11 +6,14 @@ import {
   FEATURES_NAME,
   RERENDER_DELAY
 } from './constants.js';
+
 import {
   renderSimilarMarkers
 } from './add-map-leaflet.js';
 
 import { debounce } from './util.js';
+
+import { showNotFoundOffersMessage } from './show-message.js'
 
 const filterForm = document.querySelector('.map__filters')
 let model = {};
@@ -45,18 +48,21 @@ const updateModel = (name, value) => {
   }
 };
 
+const debouncedRender = debounce(renderSimilarMarkers, RERENDER_DELAY);
+
 filterForm.addEventListener('change', ({ target }) => {
   updateModel(target.name, target.value)
 
-
-
-  debounce(() => {
-    console.log('debounce уже');
-    renderSimilarMarkers(filterData().slice(0, 10));
-  },
-    RERENDER_DELAY);
-
   // renderSimilarMarkers(filterData().slice(0, 10))
+  debouncedRender(filterData().slice(0, 10));
+
+  if (filterData().length === 0) {
+    showNotFoundOffersMessage();
+  }
+
+  // debounce(renderSimilarMarkers(filterData().slice(0, 10)), 1000);
+
+
 });
 
 export const initFilter = (data) => {
